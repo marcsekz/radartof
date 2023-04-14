@@ -1,0 +1,27 @@
+(kicad_sch (version 20230121) (generator eeschema)
+
+  (uuid b36a7827-f7a3-45fd-b015-160e0516f652)
+
+  (paper "A4")
+
+  (title_block
+    (title "Heterogeneous radar, RGB, and ToF sensor board")
+    (date "2023-03-28")
+    (rev "1")
+    (company "Center for Project-Based Learning")
+    (comment 1 "Zoltán Marcsek")
+  )
+
+  (lib_symbols
+  )
+
+
+  (hierarchical_label "{ULPI}" (shape bidirectional) (at 131.9223 99.7176 0) (fields_autoplaced)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid 544651b3-3ac3-4e67-9219-ae14f88d6c30)
+  )
+  (hierarchical_label "VBUS" (shape output) (at 165.1 99.06 0) (fields_autoplaced)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid 66e992b8-2c78-4dfe-8926-fc0134286115)
+  )
+)

@@ -405,12 +405,17 @@
       "Portenta",
       "7498011122AR",
       "vl53l5cx",
-      "J3026G01DNLT"
+      "J3026G01DNLT",
+      "BGT60UTR13DAiP",
+      "OV5640"
     ],
     "pinned_symbol_libs": [
       "STM32H745ZITx",
       "ABX00042",
-      "7498011122AR"
+      "7498011122AR",
+      "BGT60UTR13DAiP",
+      "TXU0304",
+      "VL53L5CX"
     ]
   },
   "meta": {
@@ -453,7 +458,7 @@
       "step": "",
       "vrml": ""
     },
-    "page_layout_descr_file": ""
+    "page_layout_descr_file": "ethz_frame.kicad_wks"
   },
   "schematic": {
     "annotate_start_num": 0,

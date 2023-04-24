@@ -45,7 +45,7 @@
         "silk_text_thickness": 0.15,
         "silk_text_upright": false,
         "zones": {
-          "min_clearance": 0.5
+          "min_clearance": 0.09999999999999999
         }
       },
       "diff_pair_dimensions": [
@@ -53,9 +53,27 @@
           "gap": 0.0,
           "via_gap": 0.0,
           "width": 0.0
+        },
+        {
+          "gap": 0.13,
+          "via_gap": 0.0,
+          "width": 0.2
         }
       ],
-      "drc_exclusions": [],
+      "drc_exclusions": [
+        "hole_clearance|140080000|69740000|32707a1c-e638-44cd-bed6-ab1dfd2bebba|af6cf080-37a3-41e6-99a3-76a05e135be9",
+        "hole_clearance|154920000|72260000|db0b4bb5-0f22-42d9-80d9-87e336e67971|fbe424d6-3877-4a41-9d0e-f09bda18734a",
+        "lib_footprint_mismatch|141500000|114499999|84602604-8f18-4928-81f7-ba137c93360a|00000000-0000-0000-0000-000000000000",
+        "lib_footprint_mismatch|150832833|100000000|5e8f8357-a6d0-4067-a652-b43915852a96|00000000-0000-0000-0000-000000000000",
+        "silk_edge_clearance|139450000|66980000|3a0957b2-0841-46cc-a5b7-2610760aaa66|1beca111-5325-4b3a-8d6a-53e0462094d1",
+        "silk_edge_clearance|155550000|66980000|3a0957b2-0841-46cc-a5b7-2610760aaa66|a0ee649b-e9e9-471a-b4f7-8122279f2c60",
+        "solder_mask_bridge|140180000|71000000|2bcabad0-ca20-4d11-ae45-45579e674d37|0eda3caa-4585-4c32-8d92-0607a7ab56c6",
+        "solder_mask_bridge|154820000|71000000|44c2bccf-dfdb-49b5-8102-bf53875b5d3f|3ec69b3a-566a-4242-8c9d-d9d6961456f8",
+        "unconnected_items|145400000|85660000|e7297824-a163-4569-8c69-906c65742651|76ea9ebf-01ce-48bf-ab2a-68d6afaaf3ad",
+        "unconnected_items|148600000|85660000|0f8b2e02-b39f-45dc-89fa-1bbd00f9c050|efd23d26-cb33-414b-bdea-8b36523dd6ef",
+        "unconnected_items|149800000|82580000|41ecae83-2b9e-46c1-9f98-8e27dca363bf|0f8b2e02-b39f-45dc-89fa-1bbd00f9c050",
+        "unconnected_items|151800000|85660000|efd23d26-cb33-414b-bdea-8b36523dd6ef|dfcf4673-3a32-493f-817d-e378260d8e8d"
+      ],
       "meta": {
         "version": 2
       },
@@ -84,12 +102,12 @@
         "lib_footprint_mismatch": "warning",
         "malformed_courtyard": "error",
         "microvia_drill_out_of_range": "error",
-        "missing_courtyard": "ignore",
+        "missing_courtyard": "warning",
         "missing_footprint": "warning",
         "net_conflict": "warning",
-        "npth_inside_courtyard": "ignore",
+        "npth_inside_courtyard": "warning",
         "padstack": "warning",
-        "pth_inside_courtyard": "ignore",
+        "pth_inside_courtyard": "warning",
         "shorting_items": "error",
         "silk_edge_clearance": "warning",
         "silk_over_copper": "warning",
@@ -111,21 +129,21 @@
       },
       "rules": {
         "max_error": 0.005,
-        "min_clearance": 0.0,
-        "min_connection": 0.0,
-        "min_copper_edge_clearance": 0.0,
-        "min_hole_clearance": 0.25,
+        "min_clearance": 0.09999999999999999,
+        "min_connection": 0.09999999999999999,
+        "min_copper_edge_clearance": 0.09999999999999999,
+        "min_hole_clearance": 0.09999999999999999,
         "min_hole_to_hole": 0.25,
         "min_microvia_diameter": 0.19999999999999998,
         "min_microvia_drill": 0.09999999999999999,
-        "min_resolved_spokes": 2,
+        "min_resolved_spokes": 1,
         "min_silk_clearance": 0.0,
         "min_text_height": 0.7999999999999999,
         "min_text_thickness": 0.08,
-        "min_through_hole_diameter": 0.3,
-        "min_track_width": 0.0,
+        "min_through_hole_diameter": 0.19999999999999998,
+        "min_track_width": 0.09999999999999999,
         "min_via_annular_width": 0.09999999999999999,
-        "min_via_diameter": 0.5,
+        "min_via_diameter": 0.39999999999999997,
         "solder_mask_clearance": 0.0,
         "solder_mask_min_width": 0.0,
         "solder_mask_to_copper_clearance": 0.0,
@@ -172,15 +190,28 @@
         }
       ],
       "track_widths": [
-        0.0
+        0.0,
+        0.1,
+        0.15,
+        0.2,
+        0.25,
+        0.5
       ],
       "via_dimensions": [
         {
           "diameter": 0.0,
           "drill": 0.0
+        },
+        {
+          "diameter": 0.4,
+          "drill": 0.2
+        },
+        {
+          "diameter": 0.6,
+          "drill": 0.3
         }
       ],
-      "zones_allow_external_fillets": false
+      "zones_allow_external_fillets": true
     },
     "layer_presets": [],
     "viewports": []
@@ -407,7 +438,11 @@
       "vl53l5cx",
       "J3026G01DNLT",
       "BGT60UTR13DAiP",
-      "OV5640"
+      "OV5640",
+      "216989-0001",
+      "1140084168",
+      "STDC14_header",
+      "KC2016Z"
     ],
     "pinned_symbol_libs": [
       "STM32H745ZITx",
@@ -426,8 +461,8 @@
     "classes": [
       {
         "bus_width": 12,
-        "clearance": 0.2,
-        "diff_pair_gap": 0.25,
+        "clearance": 0.1,
+        "diff_pair_gap": 0.13,
         "diff_pair_via_gap": 0.25,
         "diff_pair_width": 0.2,
         "line_style": 0,
@@ -436,9 +471,26 @@
         "name": "Default",
         "pcb_color": "rgba(0, 0, 0, 0.000)",
         "schematic_color": "rgba(0, 0, 0, 0.000)",
-        "track_width": 0.2,
-        "via_diameter": 0.8,
-        "via_drill": 0.4,
+        "track_width": 0.1,
+        "via_diameter": 0.4,
+        "via_drill": 0.2,
+        "wire_width": 6
+      },
+      {
+        "bus_width": 12,
+        "clearance": 0.1,
+        "diff_pair_gap": 0.25,
+        "diff_pair_via_gap": 0.25,
+        "diff_pair_width": 0.2,
+        "line_style": 0,
+        "microvia_diameter": 0.3,
+        "microvia_drill": 0.1,
+        "name": "pwr",
+        "pcb_color": "rgba(0, 0, 0, 0.000)",
+        "schematic_color": "rgba(0, 0, 0, 0.000)",
+        "track_width": 0.15,
+        "via_diameter": 0.4,
+        "via_drill": 0.2,
         "wire_width": 6
       }
     ],
@@ -447,7 +499,28 @@
     },
     "net_colors": null,
     "netclass_assignments": null,
-    "netclass_patterns": []
+    "netclass_patterns": [
+      {
+        "netclass": "pwr",
+        "pattern": "*VDD_*"
+      },
+      {
+        "netclass": "pwr",
+        "pattern": "+*"
+      },
+      {
+        "netclass": "pwr",
+        "pattern": "GND*"
+      },
+      {
+        "netclass": "pwr",
+        "pattern": "*V_*"
+      },
+      {
+        "netclass": "pwr",
+        "pattern": "VD"
+      }
+    ]
   },
   "pcbnew": {
     "last_paths": {
@@ -455,7 +528,7 @@
       "idf": "",
       "netlist": "",
       "specctra_dsn": "",
-      "step": "",
+      "step": "3D/radartof-hardware.step",
       "vrml": ""
     },
     "page_layout_descr_file": "ethz_frame.kicad_wks"
@@ -524,6 +597,10 @@
     [
       "b8ec3c47-fc6b-44ef-9685-77b01cad4608",
       "Camera"
+    ],
+    [
+      "1c3d9fbe-6cf2-4d26-9b7d-c2f580c91270",
+      "microSD socket"
     ],
     [
       "47d8cad2-5268-4833-ac83-7e3cb0cc6436",

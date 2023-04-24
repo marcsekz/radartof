@@ -2,7 +2,7 @@
   (layer "F.Cu")
   (attr smd)
   (fp_text reference "REF**" (at 0 -3 unlocked) (layer "F.SilkS")
-      (effects (font (size 1 1) (thickness 0.1)))
+      (effects (font (size 1 1) (thickness 0.15)))
     (tstamp e9039f17-02ba-44df-acbd-11f8b06a5aee)
   )
   (fp_text value "BGT60UTR13DAiP" (at 0 -1 unlocked) (layer "F.Fab")

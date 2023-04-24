@@ -6,4 +6,8 @@
   (lib (name "vl53l5cx")(type "KiCad")(uri "${KIPRJMOD}/Parts/VL53L5CX/footprints.pretty")(options "")(descr ""))
   (lib (name "BGT60UTR13DAiP")(type "KiCad")(uri "${KIPRJMOD}/Parts/BGT60UTR13DAiP/BGT60UTR13DAiP.pretty")(options "")(descr ""))
   (lib (name "OV5640")(type "KiCad")(uri "${KIPRJMOD}/Parts/OV5640")(options "")(descr ""))
+  (lib (name "216989-0001")(type "KiCad")(uri "${KIPRJMOD}/Parts/216989-0001")(options "")(descr ""))
+  (lib (name "1140084168")(type "KiCad")(uri "${KIPRJMOD}/Parts/1140084168")(options "")(descr ""))
+  (lib (name "STDC14_header")(type "KiCad")(uri "${KIPRJMOD}/Parts/STDC14_header.pretty")(options "")(descr ""))
+  (lib (name "KC2016Z")(type "KiCad")(uri "${KIPRJMOD}/Parts/KC2016Z.pretty")(options "")(descr ""))
 )

@@ -6,8 +6,8 @@
 
   (title_block
     (title "Heterogeneous radar, RGB, and ToF sensor board")
-    (date "2023-04-17")
-    (rev "0")
+    (date "2023-04-24")
+    (rev "1.2")
     (company "Center for Project-Based Learning")
     (comment 1 "Zoltán Marcsek")
   )
@@ -291,6 +291,9 @@
   (junction (at 171.45 77.47) (diameter 0) (color 0 0 0 0)
     (uuid 068a3496-b63c-4590-9ced-48d22f931a61)
   )
+  (junction (at 209.55 77.47) (diameter 0) (color 0 0 0 0)
+    (uuid 152feb79-f28b-4ffa-8bad-442d3baca741)
+  )
   (junction (at 116.84 106.68) (diameter 0) (color 0 0 0 0)
     (uuid 43bcf20f-f554-4dcb-9d58-45ab138088d0)
   )
@@ -302,6 +305,9 @@
   )
   (junction (at 110.49 77.47) (diameter 0) (color 0 0 0 0)
     (uuid 5ef834b4-b971-4090-9081-094ba2992972)
+  )
+  (junction (at 209.55 87.63) (diameter 0) (color 0 0 0 0)
+    (uuid 6004c008-22b4-4a8f-88b1-62b8b7aeb8ca)
   )
   (junction (at 196.85 87.63) (diameter 0) (color 0 0 0 0)
     (uuid 698cc14d-61ef-4a3d-8193-86efdcb7e347)
@@ -417,6 +423,10 @@
     (stroke (width 0) (type default))
     (uuid 435d5569-8b92-4b27-81f2-991f67099932)
   )
+  (wire (pts (xy 222.25 87.63) (xy 209.55 87.63))
+    (stroke (width 0) (type default))
+    (uuid 48dc6572-644c-4818-98ae-e111ea6de98a)
+  )
   (wire (pts (xy 209.55 78.74) (xy 209.55 77.47))
     (stroke (width 0) (type default))
     (uuid 4c3f9ae6-36df-4b14-933e-fd4badc5fe5b)
@@ -503,6 +513,10 @@
     (stroke (width 0) (type default))
     (uuid b5788515-db9d-43b9-87e2-0535eb43b753)
   )
+  (wire (pts (xy 222.25 86.36) (xy 222.25 87.63))
+    (stroke (width 0) (type default))
+    (uuid b8e9f113-0793-4ac8-9fa1-5bd12508da52)
+  )
   (wire (pts (xy 135.89 85.09) (xy 135.89 76.2))
     (stroke (width 0) (type default))
     (uuid bad52dda-d979-4b6e-8e81-6b918d11fa77)
@@ -522,6 +536,10 @@
   (wire (pts (xy 196.85 87.63) (xy 184.15 87.63))
     (stroke (width 0) (type default))
     (uuid cb67903e-2c2b-431a-8037-ec55f89fe66b)
+  )
+  (wire (pts (xy 222.25 78.74) (xy 222.25 77.47))
+    (stroke (width 0) (type default))
+    (uuid cf39566e-74a6-4fc7-8062-e434d027409c)
   )
   (wire (pts (xy 157.48 109.22) (xy 157.48 111.76))
     (stroke (width 0) (type default))
@@ -595,9 +613,18 @@
     (stroke (width 0) (type default))
     (uuid fb8d02ad-d3f7-4df0-afaf-40d620eb0bb4)
   )
+  (wire (pts (xy 209.55 77.47) (xy 222.25 77.47))
+    (stroke (width 0) (type default))
+    (uuid ff1c7a65-d2e0-4806-abab-245e39ccee1b)
+  )
   (wire (pts (xy 101.6 106.68) (xy 116.84 106.68))
     (stroke (width 0) (type default))
     (uuid ff50976d-e1af-4b60-8306-a7a20873dc0b)
+  )
+
+  (text "C55 is bypass for reference change" (at 219.71 76.2 0)
+    (effects (font (size 1.27 1.27)) (justify left bottom))
+    (uuid 6be7237d-bd24-4037-95dd-8a65f0c68e09)
   )
 
   (label "I2C3_SCL" (at 91.44 99.06 0) (fields_autoplaced)
@@ -607,6 +634,10 @@
   (label "I2C3_SDA" (at 91.44 101.6 0) (fields_autoplaced)
     (effects (font (size 1.27 1.27)) (justify left bottom))
     (uuid afe7fc81-7e9a-443e-a717-f70cfc59e9cf)
+  )
+  (label "RSVD6" (at 157.48 93.98 90) (fields_autoplaced)
+    (effects (font (size 1.27 1.27)) (justify left bottom))
+    (uuid bf03dbbc-52aa-4881-ad9d-63f43a527e66)
   )
 
   (hierarchical_label "TOF_INT" (shape output) (at 101.6 104.14 180) (fields_autoplaced)
@@ -629,7 +660,7 @@
   (symbol (lib_id "VL53L5CX:VL53L5CXV0GC/1") (at 139.7 101.6 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 11b03cde-e8b8-49f2-8f02-7600d47f6ffa)
-    (property "Reference" "U2" (at 144.78 87.63 0)
+    (property "Reference" "U7" (at 144.78 87.63 0)
       (effects (font (size 1.524 1.524)) (justify left))
     )
     (property "Value" "VL53L5CXV0GC/1" (at 139.7 96.52 0)
@@ -661,7 +692,7 @@
     (instances
       (project "radartof-hardware"
         (path "/03db8980-0fb1-4523-a968-8d3a1d96010b/ece8ebac-4e7b-4295-a605-e4e241deafdc"
-          (reference "U2") (unit 1)
+          (reference "U7") (unit 1)
         )
       )
     )
@@ -670,7 +701,7 @@
   (symbol (lib_id "Device:R") (at 116.84 82.55 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 2aa10f3b-4f5f-406e-bf31-e4c980d797b0)
-    (property "Reference" "R9" (at 118.11 81.28 0)
+    (property "Reference" "R4" (at 118.11 81.28 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "47k" (at 118.11 83.82 0)
@@ -687,7 +718,7 @@
     (instances
       (project "radartof-hardware"
         (path "/03db8980-0fb1-4523-a968-8d3a1d96010b/ece8ebac-4e7b-4295-a605-e4e241deafdc"
-          (reference "R9") (unit 1)
+          (reference "R4") (unit 1)
         )
       )
     )
@@ -696,7 +727,7 @@
   (symbol (lib_id "power:+3.3V") (at 135.89 76.2 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid 2b2f5813-b7d4-453f-bbee-e5f5bcc3edb4)
-    (property "Reference" "#PWR018" (at 135.89 80.01 0)
+    (property "Reference" "#PWR056" (at 135.89 80.01 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "+3.3V" (at 135.89 72.39 0)
@@ -712,7 +743,7 @@
     (instances
       (project "radartof-hardware"
         (path "/03db8980-0fb1-4523-a968-8d3a1d96010b/ece8ebac-4e7b-4295-a605-e4e241deafdc"
-          (reference "#PWR018") (unit 1)
+          (reference "#PWR056") (unit 1)
         )
       )
     )
@@ -721,13 +752,13 @@
   (symbol (lib_id "Device:C") (at 196.85 82.55 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 327239fe-0172-4138-8c92-16378ec8c266)
-    (property "Reference" "C4" (at 199.39 81.28 0)
+    (property "Reference" "C30" (at 199.39 81.28 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "100n" (at 199.39 83.82 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
-    (property "Footprint" "Capacitor_SMD:C_0603_1608Metric" (at 197.8152 86.36 0)
+    (property "Footprint" "Capacitor_SMD:C_0402_1005Metric" (at 197.8152 86.36 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Datasheet" "~" (at 196.85 82.55 0)
@@ -738,7 +769,7 @@
     (instances
       (project "radartof-hardware"
         (path "/03db8980-0fb1-4523-a968-8d3a1d96010b/ece8ebac-4e7b-4295-a605-e4e241deafdc"
-          (reference "C4") (unit 1)
+          (reference "C30") (unit 1)
         )
       )
     )
@@ -747,7 +778,7 @@
   (symbol (lib_id "power:GND") (at 157.48 118.11 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 36fdd0cb-87d1-4f06-94a2-69d6dac49d61)
-    (property "Reference" "#PWR016" (at 157.48 124.46 0)
+    (property "Reference" "#PWR064" (at 157.48 124.46 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (at 157.48 121.92 0)
@@ -763,7 +794,7 @@
     (instances
       (project "radartof-hardware"
         (path "/03db8980-0fb1-4523-a968-8d3a1d96010b/ece8ebac-4e7b-4295-a605-e4e241deafdc"
-          (reference "#PWR016") (unit 1)
+          (reference "#PWR064") (unit 1)
         )
       )
     )
@@ -772,7 +803,7 @@
   (symbol (lib_id "power:GND") (at 143.51 118.11 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 38fb0952-e233-4752-bfb8-530684272369)
-    (property "Reference" "#PWR015" (at 143.51 124.46 0)
+    (property "Reference" "#PWR063" (at 143.51 124.46 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (at 143.51 121.92 0)
@@ -788,7 +819,7 @@
     (instances
       (project "radartof-hardware"
         (path "/03db8980-0fb1-4523-a968-8d3a1d96010b/ece8ebac-4e7b-4295-a605-e4e241deafdc"
-          (reference "#PWR015") (unit 1)
+          (reference "#PWR063") (unit 1)
         )
       )
     )
@@ -823,7 +854,7 @@
   (symbol (lib_id "Device:C") (at 171.45 82.55 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 45336750-822e-491c-b2f9-8a1e69de6f01)
-    (property "Reference" "C2" (at 173.99 81.28 0)
+    (property "Reference" "C28" (at 173.99 81.28 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "4u7" (at 173.99 83.82 0)
@@ -840,7 +871,7 @@
     (instances
       (project "radartof-hardware"
         (path "/03db8980-0fb1-4523-a968-8d3a1d96010b/ece8ebac-4e7b-4295-a605-e4e241deafdc"
-          (reference "C2") (unit 1)
+          (reference "C28") (unit 1)
         )
       )
     )
@@ -849,7 +880,7 @@
   (symbol (lib_id "power:+3.3V") (at 171.45 76.2 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid 54dd87fe-eb31-492c-98c0-d99a854deebe)
-    (property "Reference" "#PWR020" (at 171.45 80.01 0)
+    (property "Reference" "#PWR059" (at 171.45 80.01 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "+3.3V" (at 171.45 72.39 0)
@@ -865,7 +896,7 @@
     (instances
       (project "radartof-hardware"
         (path "/03db8980-0fb1-4523-a968-8d3a1d96010b/ece8ebac-4e7b-4295-a605-e4e241deafdc"
-          (reference "#PWR020") (unit 1)
+          (reference "#PWR059") (unit 1)
         )
       )
     )
@@ -874,7 +905,7 @@
   (symbol (lib_id "power:+3.3V") (at 123.19 76.2 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid 8210436d-0dc3-439a-998a-b587fa3181d0)
-    (property "Reference" "#PWR012" (at 123.19 80.01 0)
+    (property "Reference" "#PWR055" (at 123.19 80.01 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "+3.3V" (at 123.19 72.39 0)
@@ -890,7 +921,7 @@
     (instances
       (project "radartof-hardware"
         (path "/03db8980-0fb1-4523-a968-8d3a1d96010b/ece8ebac-4e7b-4295-a605-e4e241deafdc"
-          (reference "#PWR012") (unit 1)
+          (reference "#PWR055") (unit 1)
         )
       )
     )
@@ -899,7 +930,7 @@
   (symbol (lib_id "power:+3.3V") (at 157.48 76.2 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid 882fbfdf-6d32-42f4-a8c6-e0af3f365f2a)
-    (property "Reference" "#PWR017" (at 157.48 80.01 0)
+    (property "Reference" "#PWR058" (at 157.48 80.01 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "+3.3V" (at 157.48 72.39 0)
@@ -915,7 +946,7 @@
     (instances
       (project "radartof-hardware"
         (path "/03db8980-0fb1-4523-a968-8d3a1d96010b/ece8ebac-4e7b-4295-a605-e4e241deafdc"
-          (reference "#PWR017") (unit 1)
+          (reference "#PWR058") (unit 1)
         )
       )
     )
@@ -924,13 +955,13 @@
   (symbol (lib_id "Device:C") (at 184.15 82.55 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 99e6c7d9-8966-4a38-9dbf-de550cb941fc)
-    (property "Reference" "C3" (at 186.69 81.28 0)
+    (property "Reference" "C29" (at 186.69 81.28 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "100n" (at 186.69 83.82 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
-    (property "Footprint" "Capacitor_SMD:C_0603_1608Metric" (at 185.1152 86.36 0)
+    (property "Footprint" "Capacitor_SMD:C_0402_1005Metric" (at 185.1152 86.36 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Datasheet" "~" (at 184.15 82.55 0)
@@ -941,7 +972,7 @@
     (instances
       (project "radartof-hardware"
         (path "/03db8980-0fb1-4523-a968-8d3a1d96010b/ece8ebac-4e7b-4295-a605-e4e241deafdc"
-          (reference "C3") (unit 1)
+          (reference "C29") (unit 1)
         )
       )
     )
@@ -950,7 +981,7 @@
   (symbol (lib_id "Device:R") (at 104.14 82.55 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid ab2105af-73bc-453b-9d1e-64e373d1cf85)
-    (property "Reference" "R11" (at 105.41 81.28 0)
+    (property "Reference" "R2" (at 105.41 81.28 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "2k2" (at 105.41 83.82 0)
@@ -967,7 +998,33 @@
     (instances
       (project "radartof-hardware"
         (path "/03db8980-0fb1-4523-a968-8d3a1d96010b/ece8ebac-4e7b-4295-a605-e4e241deafdc"
-          (reference "R11") (unit 1)
+          (reference "R2") (unit 1)
+        )
+      )
+    )
+  )
+
+  (symbol (lib_id "Device:C") (at 222.25 82.55 0) (unit 1)
+    (in_bom yes) (on_board yes) (dnp no)
+    (uuid b1772c65-d936-43a9-a68c-8828ba704c73)
+    (property "Reference" "C55" (at 224.79 81.28 0)
+      (effects (font (size 1.27 1.27)) (justify left))
+    )
+    (property "Value" "100n" (at 224.79 83.82 0)
+      (effects (font (size 1.27 1.27)) (justify left))
+    )
+    (property "Footprint" "Capacitor_SMD:C_0402_1005Metric" (at 223.2152 86.36 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Datasheet" "~" (at 222.25 82.55 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (pin "1" (uuid 442a7e41-7211-4bc0-b0d1-7eb03ed2e901))
+    (pin "2" (uuid b112010f-4326-4de6-9a1e-9e2d5afd0eca))
+    (instances
+      (project "radartof-hardware"
+        (path "/03db8980-0fb1-4523-a968-8d3a1d96010b/ece8ebac-4e7b-4295-a605-e4e241deafdc"
+          (reference "C55") (unit 1)
         )
       )
     )
@@ -976,7 +1033,7 @@
   (symbol (lib_id "Device:R") (at 123.19 82.55 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid b3376d00-d49b-4219-9708-a347ddc0c489)
-    (property "Reference" "R8" (at 124.46 81.28 0)
+    (property "Reference" "R5" (at 124.46 81.28 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "47k" (at 124.46 83.82 0)
@@ -993,7 +1050,7 @@
     (instances
       (project "radartof-hardware"
         (path "/03db8980-0fb1-4523-a968-8d3a1d96010b/ece8ebac-4e7b-4295-a605-e4e241deafdc"
-          (reference "R8") (unit 1)
+          (reference "R5") (unit 1)
         )
       )
     )
@@ -1002,7 +1059,7 @@
   (symbol (lib_id "Device:R") (at 157.48 82.55 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid bf6ec06a-795a-418f-b7f3-7aa5183aa58c)
-    (property "Reference" "R12" (at 158.75 81.28 0)
+    (property "Reference" "R6" (at 158.75 81.28 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "47k" (at 158.75 83.82 0)
@@ -1019,7 +1076,7 @@
     (instances
       (project "radartof-hardware"
         (path "/03db8980-0fb1-4523-a968-8d3a1d96010b/ece8ebac-4e7b-4295-a605-e4e241deafdc"
-          (reference "R12") (unit 1)
+          (reference "R6") (unit 1)
         )
       )
     )
@@ -1028,7 +1085,7 @@
   (symbol (lib_id "Device:R") (at 110.49 82.55 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid d207b938-78c8-4c31-9bc9-9700c5cb2faf)
-    (property "Reference" "R10" (at 111.76 81.28 0)
+    (property "Reference" "R3" (at 111.76 81.28 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "2k2" (at 111.76 83.82 0)
@@ -1045,7 +1102,7 @@
     (instances
       (project "radartof-hardware"
         (path "/03db8980-0fb1-4523-a968-8d3a1d96010b/ece8ebac-4e7b-4295-a605-e4e241deafdc"
-          (reference "R10") (unit 1)
+          (reference "R3") (unit 1)
         )
       )
     )
@@ -1054,7 +1111,7 @@
   (symbol (lib_id "power:GND") (at 171.45 88.9 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid d489e2a3-7bc2-4d3f-be3a-430499f75d86)
-    (property "Reference" "#PWR021" (at 171.45 95.25 0)
+    (property "Reference" "#PWR060" (at 171.45 95.25 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (at 171.45 92.71 0)
@@ -1070,7 +1127,7 @@
     (instances
       (project "radartof-hardware"
         (path "/03db8980-0fb1-4523-a968-8d3a1d96010b/ece8ebac-4e7b-4295-a605-e4e241deafdc"
-          (reference "#PWR021") (unit 1)
+          (reference "#PWR060") (unit 1)
         )
       )
     )
@@ -1079,7 +1136,7 @@
   (symbol (lib_id "power:GND") (at 116.84 118.11 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid ec5d9451-6f27-486e-8973-3c709256a54d)
-    (property "Reference" "#PWR013" (at 116.84 124.46 0)
+    (property "Reference" "#PWR061" (at 116.84 124.46 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (at 116.84 121.92 0)
@@ -1095,7 +1152,7 @@
     (instances
       (project "radartof-hardware"
         (path "/03db8980-0fb1-4523-a968-8d3a1d96010b/ece8ebac-4e7b-4295-a605-e4e241deafdc"
-          (reference "#PWR013") (unit 1)
+          (reference "#PWR061") (unit 1)
         )
       )
     )
@@ -1104,7 +1161,7 @@
   (symbol (lib_id "power:GND") (at 135.89 118.11 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid f459e734-60d7-41b9-83e4-46829aedb00b)
-    (property "Reference" "#PWR014" (at 135.89 124.46 0)
+    (property "Reference" "#PWR062" (at 135.89 124.46 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (at 135.89 121.92 0)
@@ -1120,7 +1177,7 @@
     (instances
       (project "radartof-hardware"
         (path "/03db8980-0fb1-4523-a968-8d3a1d96010b/ece8ebac-4e7b-4295-a605-e4e241deafdc"
-          (reference "#PWR014") (unit 1)
+          (reference "#PWR062") (unit 1)
         )
       )
     )
@@ -1129,7 +1186,7 @@
   (symbol (lib_id "power:+3.3V") (at 143.51 76.2 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid f9d1e4a5-fee6-496a-a1f7-011f6c0ad2e3)
-    (property "Reference" "#PWR019" (at 143.51 80.01 0)
+    (property "Reference" "#PWR057" (at 143.51 80.01 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "+3.3V" (at 143.51 72.39 0)
@@ -1145,7 +1202,7 @@
     (instances
       (project "radartof-hardware"
         (path "/03db8980-0fb1-4523-a968-8d3a1d96010b/ece8ebac-4e7b-4295-a605-e4e241deafdc"
-          (reference "#PWR019") (unit 1)
+          (reference "#PWR057") (unit 1)
         )
       )
     )
@@ -1154,13 +1211,13 @@
   (symbol (lib_id "Device:C") (at 209.55 82.55 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid fd04d409-9bfd-4359-958c-f9e63377d893)
-    (property "Reference" "C5" (at 212.09 81.28 0)
+    (property "Reference" "C31" (at 212.09 81.28 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "100n" (at 212.09 83.82 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
-    (property "Footprint" "Capacitor_SMD:C_0603_1608Metric" (at 210.5152 86.36 0)
+    (property "Footprint" "Capacitor_SMD:C_0402_1005Metric" (at 210.5152 86.36 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Datasheet" "~" (at 209.55 82.55 0)
@@ -1171,7 +1228,7 @@
     (instances
       (project "radartof-hardware"
         (path "/03db8980-0fb1-4523-a968-8d3a1d96010b/ece8ebac-4e7b-4295-a605-e4e241deafdc"
-          (reference "C5") (unit 1)
+          (reference "C31") (unit 1)
         )
       )
     )

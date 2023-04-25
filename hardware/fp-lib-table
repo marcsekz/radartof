@@ -10,4 +10,5 @@
   (lib (name "1140084168")(type "KiCad")(uri "${KIPRJMOD}/Parts/1140084168")(options "")(descr ""))
   (lib (name "STDC14_header")(type "KiCad")(uri "${KIPRJMOD}/Parts/STDC14_header.pretty")(options "")(descr ""))
   (lib (name "KC2016Z")(type "KiCad")(uri "${KIPRJMOD}/Parts/KC2016Z.pretty")(options "")(descr ""))
+  (lib (name "150066M153000")(type "KiCad")(uri "${KIPRJMOD}/Parts/150066M153000.pretty")(options "")(descr ""))
 )

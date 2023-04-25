@@ -7,4 +7,5 @@
   (lib (name "J3026G01DNLT")(type "KiCad")(uri "${KIPRJMOD}/Parts/J3026G01DNLT/J3026G01DNLT.kicad_sym")(options "")(descr ""))
   (lib (name "BGT60UTR13DAiP")(type "KiCad")(uri "${KIPRJMOD}/Parts/BGT60UTR13DAiP/BGT60UTR13DAiP.kicad_sym")(options "")(descr ""))
   (lib (name "TXU0304")(type "KiCad")(uri "${KIPRJMOD}/Parts/BGT60UTR13DAiP/TXU0304.kicad_sym")(options "")(descr ""))
+  (lib (name "radartof-power")(type "KiCad")(uri "${KIPRJMOD}/Parts/BGT60UTR13DAiP/radartof-power.kicad_sym")(options "")(descr ""))
 )

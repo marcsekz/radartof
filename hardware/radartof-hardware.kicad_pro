@@ -442,7 +442,8 @@
       "216989-0001",
       "1140084168",
       "STDC14_header",
-      "KC2016Z"
+      "KC2016Z",
+      "150066M153000"
     ],
     "pinned_symbol_libs": [
       "STM32H745ZITx",
@@ -450,7 +451,8 @@
       "7498011122AR",
       "BGT60UTR13DAiP",
       "TXU0304",
-      "VL53L5CX"
+      "VL53L5CX",
+      "radartof-power"
     ]
   },
   "meta": {
@@ -519,6 +521,18 @@
       {
         "netclass": "pwr",
         "pattern": "VD"
+      },
+      {
+        "netclass": "pwr",
+        "pattern": "Vradar"
+      },
+      {
+        "netclass": "pwr",
+        "pattern": "VTOF"
+      },
+      {
+        "netclass": "pwr",
+        "pattern": "VCAM"
       }
     ]
   },

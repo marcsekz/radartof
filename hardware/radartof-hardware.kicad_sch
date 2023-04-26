@@ -6,8 +6,8 @@
 
   (title_block
     (title "Heterogeneous radar, RGB, and ToF sensor board")
-    (date "2023-04-25")
-    (rev "1.3")
+    (date "2023-04-26")
+    (rev "1.4")
     (company "Center for Project-Based Learning")
     (comment 1 "Zoltán Marcsek")
   )
@@ -15,13 +15,13 @@
   (lib_symbols
   )
 
-  (bus_alias "SDC" (members "SDC_D0" "SDC_D1" "SDC_D2" "SDC_D3" "SDC_CLK" "SDC_CMD" "SDC_CD"))
   (bus_alias "SPI2" (members "SPI2_MOSI" "SPI2_MISO" "SPI2_SCK" "SPI2_NSS"))
+  (bus_alias "I2C1" (members "I2C1_SDA" "I2C1_SCL"))
   (bus_alias "I2C3" (members "I2C3_SDA" "I2C3_SCL"))
   (bus_alias "USB_FS" (members "USB_FS+" "USB_FS-"))
-  (bus_alias "I2C1" (members "I2C1_SDA" "I2C1_SCL"))
   (bus_alias "USB_HS" (members "USB_HS+" "USB_HS-"))
   (bus_alias "ETH" (members "ETH_A+" "ETH_A-" "ETH_B+" "ETH_B-" "ETH_LED1" "ETH_LED2"))
+  (bus_alias "SDC" (members "SDC_D0" "SDC_D1" "SDC_D2" "SDC_D3" "SDC_CLK" "SDC_CMD" "SDC_CD"))
 
   (wire (pts (xy 101.6 66.04) (xy 127 66.04))
     (stroke (width 0) (type default))
@@ -120,6 +120,11 @@
   (text "Pullups in tof sheet" (at 105.41 97.79 0)
     (effects (font (face "Asap") (size 1.27 1.27) (thickness 0.254) bold) (justify left bottom))
     (uuid 96d69ff7-a864-4dbb-9f40-3adb0174b7b5)
+  )
+  (text "Mouser cart for 5 boards: https://www.mouser.ch/ProjectManager/ProjectDetail.aspx?AccessID=c16bec37f3"
+    (at 12.7 196.85 0)
+    (effects (font (face "Asap") (size 2 2)) (justify left bottom))
+    (uuid cc70a609-ebe2-4fca-99b0-9a814db20f8c)
   )
 
   (sheet (at 190.5 50.8) (size 25.4 25.4) (fields_autoplaced)

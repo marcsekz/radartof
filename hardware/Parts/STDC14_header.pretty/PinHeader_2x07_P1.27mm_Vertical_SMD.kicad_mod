@@ -153,9 +153,14 @@
   (pad "12" smd rect (at 1.95 2.54) (size 2.4 0.74) (layers "F.Cu" "F.Paste" "F.Mask") (tstamp 2e2ade49-dbf8-44c2-8e7b-215a073660e8))
   (pad "13" smd rect (at -1.95 3.81) (size 2.4 0.74) (layers "F.Cu" "F.Paste" "F.Mask") (tstamp 6fd0d150-daf6-41cc-90dc-3d36227fdf77))
   (pad "14" smd rect (at 1.95 3.81) (size 2.4 0.74) (layers "F.Cu" "F.Paste" "F.Mask") (tstamp c894a792-a3ae-45c0-893d-6677ce828157))
-  (model "${KICAD6_3DMODEL_DIR}/Connector_PinHeader_1.27mm.3dshapes/PinHeader_2x07_P1.27mm_Vertical_SMD.wrl"
+  (model "${KICAD6_3DMODEL_DIR}/Connector_PinHeader_1.27mm.3dshapes/PinHeader_2x07_P1.27mm_Vertical_SMD.wrl" hide
     (offset (xyz 0 0 0))
     (scale (xyz 1 1 1))
     (rotate (xyz 0 0 0))
+  )
+  (model "${KIPRJMOD}/Parts/STDC14_header.pretty/FTSH-107-01-L-DV-K-P.stp"
+    (offset (xyz 0 0 0.4))
+    (scale (xyz 1 1 1))
+    (rotate (xyz -90 0 90))
   )
 )

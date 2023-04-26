@@ -11,4 +11,5 @@
   (lib (name "STDC14_header")(type "KiCad")(uri "${KIPRJMOD}/Parts/STDC14_header.pretty")(options "")(descr ""))
   (lib (name "KC2016Z")(type "KiCad")(uri "${KIPRJMOD}/Parts/KC2016Z.pretty")(options "")(descr ""))
   (lib (name "150066M153000")(type "KiCad")(uri "${KIPRJMOD}/Parts/150066M153000.pretty")(options "")(descr ""))
+  (lib (name "CDRH2D14NP-2R2NC")(type "KiCad")(uri "${KIPRJMOD}/Parts/CDRH2D14NP-2R2NC.pretty")(options "")(descr ""))
 )

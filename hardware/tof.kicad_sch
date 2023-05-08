@@ -841,7 +841,7 @@
       (effects (font (size 1.524 1.524)) hide)
     )
     (property "Datasheet" "https://www.st.com/resource/en/datasheet/vl53l5cx.pdf" (at 116.84 77.47 0)
-      (effects (font (size 1.524 1.524)))
+      (effects (font (size 1.524 1.524)) hide)
     )
     (property "MOUSER NO" "511-VL53L5CXV0GC/1" (at 139.7 101.6 0)
       (effects (font (size 1.27 1.27)) hide)

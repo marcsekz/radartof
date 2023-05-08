@@ -15,12 +15,12 @@
   (lib_symbols
   )
 
-  (bus_alias "SPI2" (members "SPI2_MOSI" "SPI2_MISO" "SPI2_SCK" "SPI2_NSS"))
-  (bus_alias "I2C1" (members "I2C1_SDA" "I2C1_SCL"))
-  (bus_alias "I2C3" (members "I2C3_SDA" "I2C3_SCL"))
   (bus_alias "USB_FS" (members "USB_FS+" "USB_FS-"))
-  (bus_alias "USB_HS" (members "USB_HS+" "USB_HS-"))
+  (bus_alias "I2C1" (members "I2C1_SDA" "I2C1_SCL"))
+  (bus_alias "SPI2" (members "SPI2_MOSI" "SPI2_MISO" "SPI2_SCK" "SPI2_NSS"))
   (bus_alias "ETH" (members "ETH_A+" "ETH_A-" "ETH_B+" "ETH_B-" "ETH_LED1" "ETH_LED2"))
+  (bus_alias "USB_HS" (members "USB_HS+" "USB_HS-"))
+  (bus_alias "I2C3" (members "I2C3_SDA" "I2C3_SCL"))
   (bus_alias "SDC" (members "SDC_D0" "SDC_D1" "SDC_D2" "SDC_D3" "SDC_CLK" "SDC_CMD" "SDC_CD"))
 
   (wire (pts (xy 101.6 66.04) (xy 127 66.04))

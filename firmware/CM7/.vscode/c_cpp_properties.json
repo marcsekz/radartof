@@ -1,0 +1,50 @@
+{
+    "env": {},
+    "configurations": [
+        {
+            "name": "Linux",
+            "intelliSenseMode": "${default}",
+            "includePath": [
+                "./Core/Inc",
+                "./LWIP/App",
+                "./LWIP/Target",
+                "./USB_DEVICE/App",
+                "./USB_DEVICE/Target",
+                "./../Middlewares/Third_Party/LwIP/src/include",
+                "./../Middlewares/Third_Party/LwIP/system",
+                "./../Drivers/STM32H7xx_HAL_Driver/Inc",
+                "./../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy",
+                "./../Middlewares/Third_Party/FreeRTOS/Source/include",
+                "./../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2",
+                "./../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F",
+                "./../Drivers/BSP/Components/lan8742",
+                "./../Middlewares/Third_Party/LwIP/src/include/netif/ppp",
+                "./../Middlewares/ST/STM32_USB_Device_Library/Core/Inc",
+                "./../Middlewares/ST/STM32_USB_Device_Library/Class/MSC/Inc",
+                "./../Drivers/CMSIS/Device/ST/STM32H7xx/Include",
+                "./../Middlewares/Third_Party/LwIP/src/include/lwip",
+                "./../Middlewares/Third_Party/LwIP/src/include/lwip/apps",
+                "./../Middlewares/Third_Party/LwIP/src/include/lwip/priv",
+                "./../Middlewares/Third_Party/LwIP/src/include/lwip/prot",
+                "./../Middlewares/Third_Party/LwIP/src/include/netif",
+                "./../Middlewares/Third_Party/LwIP/src/include/compat/posix",
+                "./../Middlewares/Third_Party/LwIP/src/include/compat/posix/arpa",
+                "./../Middlewares/Third_Party/LwIP/src/include/compat/posix/net",
+                "./../Middlewares/Third_Party/LwIP/src/include/compat/posix/sys",
+                "./../Middlewares/Third_Party/LwIP/src/include/compat/stdc",
+                "./../Middlewares/Third_Party/LwIP/system/arch",
+                "./../Drivers/CMSIS/Include"
+            ],
+            "defines": [
+                "DEBUG",
+                "CORE_CM7",
+                "USE_HAL_DRIVER",
+                "STM32H747xx"
+            ],
+            "cStandard": "c11",
+            "cppStandard": "c++17",
+            "compilerPath": "/usr/bin/gcc"
+        }
+    ],
+    "version": 4
+}

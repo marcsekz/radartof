@@ -1,0 +1,35 @@
+{
+    "env": {},
+    "configurations": [
+        {
+            "name": "Linux",
+            "intelliSenseMode": "${default}",
+            "includePath": [
+                "./X-CUBE-TOF1/Target",
+                "./USB_DEVICE/App",
+                "./USB_DEVICE/Target",
+                "./Core/Inc",
+                "./../Drivers/BSP/Components/vl53l5cx/modules",
+                "./../Drivers/BSP/Components/vl53l5cx/porting",
+                "./../Drivers/BSP/Components/vl53l5cx",
+                "./../Drivers/STM32H7xx_HAL_Driver/Inc",
+                "./../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy",
+                "./../Utilities/JPEG",
+                "./../Middlewares/ST/STM32_USB_Device_Library/Core/Inc",
+                "./../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc",
+                "./../Drivers/CMSIS/Device/ST/STM32H7xx/Include",
+                "./../Drivers/CMSIS/Include"
+            ],
+            "defines": [
+                "DEBUG",
+                "CORE_CM4",
+                "USE_HAL_DRIVER",
+                "STM32H747xx"
+            ],
+            "cStandard": "c11",
+            "cppStandard": "c++17",
+            "compilerPath": "/usr/bin/gcc"
+        }
+    ],
+    "version": 4
+}

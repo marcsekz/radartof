@@ -51,7 +51,6 @@ extern "C" {
 
 /* Exported functions prototypes ---------------------------------------------*/
 void Error_Handler(void);
-void MX_GPIO_Init(void);
 void MX_FMC_Init(void);
 void MX_QUADSPI_Init(void);
 void MX_SDMMC2_SD_Init(void);
@@ -69,8 +68,6 @@ void MX_SDMMC2_SD_Init(void);
 #define TOF_RST_GPIO_Port GPIOD
 #define TOF_LPn_Pin GPIO_PIN_2
 #define TOF_LPn_GPIO_Port GPIOI
-#define LEDG_Pin GPIO_PIN_6
-#define LEDG_GPIO_Port GPIOK
 #define TOF_INT_Pin GPIO_PIN_9
 #define TOF_INT_GPIO_Port GPIOB
 #define LEDB_Pin GPIO_PIN_7
@@ -83,8 +80,6 @@ void MX_SDMMC2_SD_Init(void);
 #define SDC_CD_GPIO_Port GPIOI
 #define CAM_PWDN_Pin GPIO_PIN_14
 #define CAM_PWDN_GPIO_Port GPIOI
-#define OSCEN_Pin GPIO_PIN_1
-#define OSCEN_GPIO_Port GPIOH
 #define CAM_nRST_Pin GPIO_PIN_15
 #define CAM_nRST_GPIO_Port GPIOI
 

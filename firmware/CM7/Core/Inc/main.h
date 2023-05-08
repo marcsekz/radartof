@@ -51,6 +51,9 @@ extern "C" {
 
 /* Exported functions prototypes ---------------------------------------------*/
 void Error_Handler(void);
+void MX_FMC_Init(void);
+void MX_QUADSPI_Init(void);
+void MX_SDMMC2_SD_Init(void);
 void MX_UART4_Init(void);
 
 /* USER CODE BEGIN EFP */
@@ -60,6 +63,10 @@ void MX_UART4_Init(void);
 /* Private defines -----------------------------------------------------------*/
 #define ETH_nRST_Pin GPIO_PIN_15
 #define ETH_nRST_GPIO_Port GPIOJ
+#define LEDG_Pin GPIO_PIN_6
+#define LEDG_GPIO_Port GPIOK
+#define OSCEN_Pin GPIO_PIN_1
+#define OSCEN_GPIO_Port GPIOH
 
 /* USER CODE BEGIN Private defines */
 

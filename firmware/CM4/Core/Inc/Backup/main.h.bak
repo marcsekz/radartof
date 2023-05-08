@@ -54,19 +54,12 @@ void Error_Handler(void);
 void MX_FMC_Init(void);
 void MX_QUADSPI_Init(void);
 void MX_SDMMC2_SD_Init(void);
-void MX_SPI2_Init(void);
 
 /* USER CODE BEGIN EFP */
 
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
-#define TOF_RST_Pin GPIO_PIN_3
-#define TOF_RST_GPIO_Port GPIOD
-#define TOF_LPn_Pin GPIO_PIN_2
-#define TOF_LPn_GPIO_Port GPIOI
-#define TOF_PWREN_PLACEHOLDER_Pin GPIO_PIN_3
-#define TOF_PWREN_PLACEHOLDER_GPIO_Port GPIOI
 
 /* USER CODE BEGIN Private defines */
 

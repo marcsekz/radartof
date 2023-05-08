@@ -58,6 +58,8 @@ void MX_UART4_Init(void);
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
+#define ETH_nRST_Pin GPIO_PIN_15
+#define ETH_nRST_GPIO_Port GPIOJ
 
 /* USER CODE BEGIN Private defines */
 

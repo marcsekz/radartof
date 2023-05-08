@@ -69,7 +69,6 @@ SDRAM_HandleTypeDef hsdram1;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
-static void MX_GPIO_Init(void);
 static void MX_SPI2_Init(void);
 static void MX_I2C1_Init(void);
 static void MX_DCMI_Init(void);
@@ -123,7 +122,6 @@ int main(void)
   /* USER CODE END SysInit */
 
   /* Initialize all configured peripherals */
-  MX_GPIO_Init();
   MX_SPI2_Init();
   MX_I2C1_Init();
   MX_DCMI_Init();
@@ -472,7 +470,7 @@ void MX_FMC_Init(void)
   * @param None
   * @retval None
   */
-static void MX_GPIO_Init(void)
+void MX_GPIO_Init(void)
 {
   GPIO_InitTypeDef GPIO_InitStruct = {0};
 /* USER CODE BEGIN MX_GPIO_Init_1 */
@@ -480,20 +478,47 @@ static void MX_GPIO_Init(void)
 
   /* GPIO Ports Clock Enable */
   __HAL_RCC_GPIOI_CLK_ENABLE();
+  __HAL_RCC_GPIOK_CLK_ENABLE();
+  __HAL_RCC_GPIOG_CLK_ENABLE();
   __HAL_RCC_GPIOE_CLK_ENABLE();
   __HAL_RCC_GPIOB_CLK_ENABLE();
   __HAL_RCC_GPIOD_CLK_ENABLE();
   __HAL_RCC_GPIOH_CLK_ENABLE();
-  __HAL_RCC_GPIOG_CLK_ENABLE();
   __HAL_RCC_GPIOA_CLK_ENABLE();
   __HAL_RCC_GPIOF_CLK_ENABLE();
   __HAL_RCC_GPIOC_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
+  HAL_GPIO_WritePin(GPIOK, LEDR_Pin|LEDG_Pin|LEDB_Pin, GPIO_PIN_RESET);
+
+  /*Configure GPIO pin Output Level */
+  HAL_GPIO_WritePin(RADAR_nRST_GPIO_Port, RADAR_nRST_Pin, GPIO_PIN_RESET);
+
+  /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(TOF_RST_GPIO_Port, TOF_RST_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOI, TOF_LPn_Pin|TOF_PWREN_PLACEHOLDER_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOI, TOF_LPn_Pin|CAM_PWDN_Pin|CAM_nRST_Pin, GPIO_PIN_RESET);
+
+  /*Configure GPIO pin Output Level */
+  HAL_GPIO_WritePin(TOF_PWREN_GPIO_Port, TOF_PWREN_Pin, GPIO_PIN_RESET);
+
+  /*Configure GPIO pin Output Level */
+  HAL_GPIO_WritePin(OSCEN_GPIO_Port, OSCEN_Pin, GPIO_PIN_SET);
+
+  /*Configure GPIO pins : LEDR_Pin LEDG_Pin LEDB_Pin */
+  GPIO_InitStruct.Pin = LEDR_Pin|LEDG_Pin|LEDB_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+  HAL_GPIO_Init(GPIOK, &GPIO_InitStruct);
+
+  /*Configure GPIO pin : RADAR_nRST_Pin */
+  GPIO_InitStruct.Pin = RADAR_nRST_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+  HAL_GPIO_Init(RADAR_nRST_GPIO_Port, &GPIO_InitStruct);
 
   /*Configure GPIO pin : TOF_RST_Pin */
   GPIO_InitStruct.Pin = TOF_RST_Pin;
@@ -502,12 +527,44 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(TOF_RST_GPIO_Port, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : TOF_LPn_Pin TOF_PWREN_PLACEHOLDER_Pin */
-  GPIO_InitStruct.Pin = TOF_LPn_Pin|TOF_PWREN_PLACEHOLDER_Pin;
+  /*Configure GPIO pins : TOF_LPn_Pin CAM_PWDN_Pin CAM_nRST_Pin */
+  GPIO_InitStruct.Pin = TOF_LPn_Pin|CAM_PWDN_Pin|CAM_nRST_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOI, &GPIO_InitStruct);
+
+  /*Configure GPIO pin : TOF_INT_Pin */
+  GPIO_InitStruct.Pin = TOF_INT_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  HAL_GPIO_Init(TOF_INT_GPIO_Port, &GPIO_InitStruct);
+
+  /*Configure GPIO pin : RADAR_INT_Pin */
+  GPIO_InitStruct.Pin = RADAR_INT_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  HAL_GPIO_Init(RADAR_INT_GPIO_Port, &GPIO_InitStruct);
+
+  /*Configure GPIO pin : TOF_PWREN_Pin */
+  GPIO_InitStruct.Pin = TOF_PWREN_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+  HAL_GPIO_Init(TOF_PWREN_GPIO_Port, &GPIO_InitStruct);
+
+  /*Configure GPIO pin : SDC_CD_Pin */
+  GPIO_InitStruct.Pin = SDC_CD_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  HAL_GPIO_Init(SDC_CD_GPIO_Port, &GPIO_InitStruct);
+
+  /*Configure GPIO pin : OSCEN_Pin */
+  GPIO_InitStruct.Pin = OSCEN_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+  HAL_GPIO_Init(OSCEN_GPIO_Port, &GPIO_InitStruct);
 
 /* USER CODE BEGIN MX_GPIO_Init_2 */
 /* USER CODE END MX_GPIO_Init_2 */

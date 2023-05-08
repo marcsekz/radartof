@@ -51,6 +51,7 @@ extern "C" {
 
 /* Exported functions prototypes ---------------------------------------------*/
 void Error_Handler(void);
+void MX_GPIO_Init(void);
 void MX_FMC_Init(void);
 void MX_QUADSPI_Init(void);
 void MX_SDMMC2_SD_Init(void);
@@ -60,6 +61,32 @@ void MX_SDMMC2_SD_Init(void);
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
+#define LEDR_Pin GPIO_PIN_5
+#define LEDR_GPIO_Port GPIOK
+#define RADAR_nRST_Pin GPIO_PIN_9
+#define RADAR_nRST_GPIO_Port GPIOG
+#define TOF_RST_Pin GPIO_PIN_3
+#define TOF_RST_GPIO_Port GPIOD
+#define TOF_LPn_Pin GPIO_PIN_2
+#define TOF_LPn_GPIO_Port GPIOI
+#define LEDG_Pin GPIO_PIN_6
+#define LEDG_GPIO_Port GPIOK
+#define TOF_INT_Pin GPIO_PIN_9
+#define TOF_INT_GPIO_Port GPIOB
+#define LEDB_Pin GPIO_PIN_7
+#define LEDB_GPIO_Port GPIOK
+#define RADAR_INT_Pin GPIO_PIN_14
+#define RADAR_INT_GPIO_Port GPIOG
+#define TOF_PWREN_Pin GPIO_PIN_8
+#define TOF_PWREN_GPIO_Port GPIOA
+#define SDC_CD_Pin GPIO_PIN_10
+#define SDC_CD_GPIO_Port GPIOI
+#define CAM_PWDN_Pin GPIO_PIN_14
+#define CAM_PWDN_GPIO_Port GPIOI
+#define OSCEN_Pin GPIO_PIN_1
+#define OSCEN_GPIO_Port GPIOH
+#define CAM_nRST_Pin GPIO_PIN_15
+#define CAM_nRST_GPIO_Port GPIOI
 
 /* USER CODE BEGIN Private defines */
 

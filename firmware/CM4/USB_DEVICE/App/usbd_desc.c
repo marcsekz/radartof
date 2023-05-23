@@ -345,9 +345,12 @@ static void Get_SerialNum(void)
 
 /* USER CODE BEGIN SerialNum */
 
-  deviceserial0 = DEVICE_SERIAL0;
-  deviceserial1 = DEVICE_SERIAL1;
-  deviceserial2 = DEVICE_SERIAL2;
+//  deviceserial0 = DEVICE_SERIAL0;
+//  deviceserial1 = DEVICE_SERIAL1;
+//  deviceserial2 = DEVICE_SERIAL2;
+  deviceserial0 = 0xdeadbeef;
+  deviceserial1 = 0xdeadbeef;
+  deviceserial2 = 0xdeadbeef;
 
 /* USER CODE END SerialNum */
 

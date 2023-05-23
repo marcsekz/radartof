@@ -51,9 +51,6 @@ extern "C" {
 
 /* Exported functions prototypes ---------------------------------------------*/
 void Error_Handler(void);
-void MX_FMC_Init(void);
-void MX_QUADSPI_Init(void);
-void MX_SDMMC2_SD_Init(void);
 
 /* USER CODE BEGIN EFP */
 

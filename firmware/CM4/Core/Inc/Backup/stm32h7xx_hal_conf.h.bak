@@ -56,7 +56,7 @@
 /* #define HAL_HRTIM_MODULE_ENABLED   */
 /* #define HAL_HSEM_MODULE_ENABLED   */
 /* #define HAL_GFXMMU_MODULE_ENABLED   */
-#define HAL_JPEG_MODULE_ENABLED
+/* #define HAL_JPEG_MODULE_ENABLED   */
 /* #define HAL_OPAMP_MODULE_ENABLED   */
 /* #define HAL_OSPI_MODULE_ENABLED   */
 /* #define HAL_OSPI_MODULE_ENABLED   */
@@ -85,7 +85,7 @@
 /* #define HAL_HCD_MODULE_ENABLED   */
 /* #define HAL_DFSDM_MODULE_ENABLED   */
 /* #define HAL_DSI_MODULE_ENABLED   */
-#define HAL_JPEG_MODULE_ENABLED
+/* #define HAL_JPEG_MODULE_ENABLED   */
 /* #define HAL_MDIOS_MODULE_ENABLED   */
 /* #define HAL_PSSI_MODULE_ENABLED   */
 /* #define HAL_DTS_MODULE_ENABLED   */
@@ -165,7 +165,7 @@
 /**
   * @brief This is the HAL system configuration section
   */
-#define  VDD_VALUE                    (3300UL) /*!< Value of VDD in mv */
+#define  VDD_VALUE                    (3000UL) /*!< Value of VDD in mv */
 #define  TICK_INT_PRIORITY            (15UL) /*!< tick interrupt priority */
 #define  USE_RTOS                     0
 #define  USE_SD_TRANSCEIVER           0U               /*!< use uSD Transceiver */

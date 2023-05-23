@@ -33,7 +33,9 @@
                 "./../Middlewares/Third_Party/LwIP/src/include/compat/posix/sys",
                 "./../Middlewares/Third_Party/LwIP/src/include/compat/stdc",
                 "./../Middlewares/Third_Party/LwIP/system/arch",
-                "./../Drivers/CMSIS/Include"
+                "./../Drivers/CMSIS/Include",
+                "./../Drivers/BSP/Components/vl53l5cx/porting",
+                "./../Drivers/BSP/Components/vl53l5cx/modules"
             ],
             "defines": [
                 "DEBUG",

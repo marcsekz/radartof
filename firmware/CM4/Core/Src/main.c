@@ -24,7 +24,7 @@
 /* USER CODE BEGIN Includes */
 
 #include "my_util.h"
-#include "pmic.h"
+#include "app_tof.h"
 
 /* USER CODE END Includes */
 
@@ -53,8 +53,6 @@ DCMI_HandleTypeDef hdcmi;
 
 I2C_HandleTypeDef hi2c1;
 
-JPEG_HandleTypeDef hjpeg;
-
 QSPI_HandleTypeDef hqspi;
 
 SD_HandleTypeDef hsd2;
@@ -73,10 +71,12 @@ SDRAM_HandleTypeDef hsdram1;
 
 /* Private function prototypes -----------------------------------------------*/
 static void MX_GPIO_Init(void);
+static void MX_FMC_Init(void);
+static void MX_QUADSPI_Init(void);
+static void MX_SDMMC2_SD_Init(void);
 static void MX_SPI2_Init(void);
 static void MX_I2C1_Init(void);
 static void MX_DCMI_Init(void);
-static void MX_JPEG_Init(void);
 static void MX_UART4_Init(void);
 static void MX_TIM15_Init(void);
 /* USER CODE BEGIN PFP */
@@ -128,20 +128,20 @@ int main(void)
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
-  MX_FMC_Init();
-  MX_QUADSPI_Init();
-  MX_SDMMC2_SD_Init();
-  MX_SPI2_Init();
-  MX_I2C1_Init();
-  MX_DCMI_Init();
   MX_USB_DEVICE_Init();
-  MX_JPEG_Init();
-  MX_UART4_Init();
-  MX_TIM15_Init();
   /* USER CODE BEGIN 2 */
+  BSP_I2C3_Init();
+  MX_TOF_Init();
 
   Delay_us_Init(&htim15);
-  PMIC_Init(&hi2c1);
+
+//  while (2)
+//  {
+//	  HAL_Delay(1000);
+//	  printf("penis\r\n");
+////	  CDC_Transmit_FS("Penis\r\n", 7);
+//	  HAL_GPIO_TogglePin(LEDB_GPIO_Port, LEDB_Pin);
+//  }
 
   /* USER CODE END 2 */
 
@@ -152,9 +152,10 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
+    MX_TOF_Process();
 
-    HAL_GPIO_TogglePin(LEDG_GPIO_Port, LEDG_Pin);
-    HAL_Delay(100);
+    HAL_GPIO_TogglePin(LEDB_GPIO_Port, LEDB_Pin);
+    HAL_Delay(1000);
   }
   /* USER CODE END 3 */
 }
@@ -212,7 +213,7 @@ static void MX_I2C1_Init(void)
 
   /* USER CODE END I2C1_Init 1 */
   hi2c1.Instance = I2C1;
-  hi2c1.Init.Timing = 0x307075B1;
+  hi2c1.Init.Timing = 0x10C0ECFF;
   hi2c1.Init.OwnAddress1 = 0;
   hi2c1.Init.AddressingMode = I2C_ADDRESSINGMODE_7BIT;
   hi2c1.Init.DualAddressMode = I2C_DUALADDRESS_DISABLE;
@@ -245,37 +246,11 @@ static void MX_I2C1_Init(void)
 }
 
 /**
-  * @brief JPEG Initialization Function
-  * @param None
-  * @retval None
-  */
-static void MX_JPEG_Init(void)
-{
-
-  /* USER CODE BEGIN JPEG_Init 0 */
-
-  /* USER CODE END JPEG_Init 0 */
-
-  /* USER CODE BEGIN JPEG_Init 1 */
-
-  /* USER CODE END JPEG_Init 1 */
-  hjpeg.Instance = JPEG;
-  if (HAL_JPEG_Init(&hjpeg) != HAL_OK)
-  {
-    Error_Handler();
-  }
-  /* USER CODE BEGIN JPEG_Init 2 */
-
-  /* USER CODE END JPEG_Init 2 */
-
-}
-
-/**
   * @brief QUADSPI Initialization Function
   * @param None
   * @retval None
   */
-void MX_QUADSPI_Init(void)
+static void MX_QUADSPI_Init(void)
 {
 
   /* USER CODE BEGIN QUADSPI_Init 0 */
@@ -310,7 +285,7 @@ void MX_QUADSPI_Init(void)
   * @param None
   * @retval None
   */
-void MX_SDMMC2_SD_Init(void)
+static void MX_SDMMC2_SD_Init(void)
 {
 
   /* USER CODE BEGIN SDMMC2_Init 0 */
@@ -549,7 +524,7 @@ static void MX_GPIO_Init(void)
   __HAL_RCC_GPIOC_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOK, LEDR_Pin|LEDB_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOK, LEDR_Pin|LEDB_Pin, GPIO_PIN_SET);
 
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(RADAR_nRST_GPIO_Port, RADAR_nRST_Pin, GPIO_PIN_RESET);
@@ -621,6 +596,21 @@ static void MX_GPIO_Init(void)
 }
 
 /* USER CODE BEGIN 4 */
+
+int _write(int file, char *ptr, int len) {
+    static uint8_t rc = USBD_OK;
+
+    do {
+        rc = CDC_Transmit_FS(ptr, len);
+    } while (USBD_BUSY == rc);
+
+    if (USBD_FAIL == rc) {
+        /// NOTE: Should never reach here.
+        /// TODO: Handle this error.
+        return 0;
+    }
+    return len;
+}
 
 /* USER CODE END 4 */
 

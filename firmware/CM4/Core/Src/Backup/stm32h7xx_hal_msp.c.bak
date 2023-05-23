@@ -188,7 +188,6 @@ void HAL_DCMI_MspDeInit(DCMI_HandleTypeDef* hdcmi)
 */
 void HAL_I2C_MspInit(I2C_HandleTypeDef* hi2c)
 {
-  GPIO_InitTypeDef GPIO_InitStruct = {0};
   RCC_PeriphCLKInitTypeDef PeriphClkInitStruct = {0};
   if(hi2c->Instance==I2C1)
   {
@@ -204,18 +203,6 @@ void HAL_I2C_MspInit(I2C_HandleTypeDef* hi2c)
     {
       Error_Handler();
     }
-
-    __HAL_RCC_GPIOB_CLK_ENABLE();
-    /**I2C1 GPIO Configuration
-    PB6     ------> I2C1_SCL
-    PB7     ------> I2C1_SDA
-    */
-    GPIO_InitStruct.Pin = GPIO_PIN_6|GPIO_PIN_7;
-    GPIO_InitStruct.Mode = GPIO_MODE_AF_OD;
-    GPIO_InitStruct.Pull = GPIO_NOPULL;
-    GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
-    GPIO_InitStruct.Alternate = GPIO_AF4_I2C1;
-    HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
     /* Peripheral clock enable */
     __HAL_RCC_I2C1_CLK_ENABLE();
@@ -241,62 +228,9 @@ void HAL_I2C_MspDeInit(I2C_HandleTypeDef* hi2c)
   /* USER CODE END I2C1_MspDeInit 0 */
     /* Peripheral clock disable */
     __HAL_RCC_I2C1_CLK_DISABLE();
-
-    /**I2C1 GPIO Configuration
-    PB6     ------> I2C1_SCL
-    PB7     ------> I2C1_SDA
-    */
-    HAL_GPIO_DeInit(GPIOB, GPIO_PIN_6);
-
-    HAL_GPIO_DeInit(GPIOB, GPIO_PIN_7);
-
   /* USER CODE BEGIN I2C1_MspDeInit 1 */
 
   /* USER CODE END I2C1_MspDeInit 1 */
-  }
-
-}
-
-/**
-* @brief JPEG MSP Initialization
-* This function configures the hardware resources used in this example
-* @param hjpeg: JPEG handle pointer
-* @retval None
-*/
-void HAL_JPEG_MspInit(JPEG_HandleTypeDef* hjpeg)
-{
-  if(hjpeg->Instance==JPEG)
-  {
-  /* USER CODE BEGIN JPEG_MspInit 0 */
-
-  /* USER CODE END JPEG_MspInit 0 */
-    /* Peripheral clock enable */
-    __HAL_RCC_JPEG_CLK_ENABLE();
-  /* USER CODE BEGIN JPEG_MspInit 1 */
-
-  /* USER CODE END JPEG_MspInit 1 */
-  }
-
-}
-
-/**
-* @brief JPEG MSP De-Initialization
-* This function freeze the hardware resources used in this example
-* @param hjpeg: JPEG handle pointer
-* @retval None
-*/
-void HAL_JPEG_MspDeInit(JPEG_HandleTypeDef* hjpeg)
-{
-  if(hjpeg->Instance==JPEG)
-  {
-  /* USER CODE BEGIN JPEG_MspDeInit 0 */
-
-  /* USER CODE END JPEG_MspDeInit 0 */
-    /* Peripheral clock disable */
-    __HAL_RCC_JPEG_CLK_DISABLE();
-  /* USER CODE BEGIN JPEG_MspDeInit 1 */
-
-  /* USER CODE END JPEG_MspDeInit 1 */
   }
 
 }

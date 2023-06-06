@@ -1,0 +1,18 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "cortex-debug",
+            "request": "launch",
+            "servertype": "stlink",
+            "cwd": "${workspaceRoot}",
+            "executable": "Debug/radartof-fw-portenta_CM4.elf",
+            "name": "Debug CM4 (ST-Link)",
+            "device": "stm32h747xih6",
+            "svdFile": "${userHome}/DEV/SVD/ST/STM32H7/STM32H747_CM4.svd",
+            "interface": "swd",
+            "runToEntryPoint": "main",
+            "internalConsoleOptions": "openOnSessionStart",
+        }
+    ]
+}

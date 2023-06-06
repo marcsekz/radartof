@@ -32,8 +32,6 @@ extern "C" {
 
 /* Private typedef -----------------------------------------------------------*/
 
-extern UART_HandleTypeDef huart4;
-
 /* Private define ------------------------------------------------------------*/
 /* uncomment following to use directly the bare driver instead of the BSP */
 /* #define USE_BARE_DRIVER */
@@ -194,7 +192,7 @@ static void MX_VL53L5CX_SimpleRanging_Process(void)
   CUSTOM_RANGING_SENSOR_ReadID(CUSTOM_VL53L5CX, &Id);
   CUSTOM_RANGING_SENSOR_GetCapabilities(CUSTOM_VL53L5CX, &Cap);
 
-  Profile.RangingProfile = RS_PROFILE_4x4_CONTINUOUS;
+  Profile.RangingProfile = RS_PROFILE_8x8_CONTINUOUS;
   Profile.TimingBudget = TIMING_BUDGET; /* 5 ms < TimingBudget < 100 ms */
   Profile.Frequency = RANGING_FREQUENCY; /* Ranging frequency Hz (shall be consistent with TimingBudget value) */
   Profile.EnableAmbient = 0; /* Enable: 1, Disable: 0 */
@@ -238,7 +236,8 @@ static void print_result(RANGING_SENSOR_Result_t *Result)
   printf("Cell Format :\n\n");
   for (l = 0; l < RANGING_SENSOR_NB_TARGET_PER_ZONE; l++)
   {
-    printf(" \033[38;5;10m%20s\033[0m : %20s\n", "Distance [mm]", "Status");
+//    printf(" \033[38;5;10m%20s\033[0m : %20s\n", "Distance [mm]", "Status");
+    printf(" %20s : %20s\n", "Distance [mm]", "Status");
     if ((Profile.EnableAmbient != 0) || (Profile.EnableSignal != 0))
     {
       printf(" %20s : %20s\n", "Signal [kcps/spad]", "Ambient [kcps/spad]");
@@ -266,12 +265,14 @@ static void print_result(RANGING_SENSOR_Result_t *Result)
         {
           if ((long)Result->ZoneResult[j+k].Distance[l] < 500)
           {
-            printf("| \033[38;5;9m%5ld\033[0m  :  %5ld ",
+//            printf("| \033[38;5;9m%5ld\033[0m  :  %5ld ",
+            printf("| %5ld  :  %5ld ",
               (long)Result->ZoneResult[j+k].Distance[l],
               (long)Result->ZoneResult[j+k].Status[l]);
           } else
           {
-            printf("| \033[38;5;10m%5ld\033[0m  :  %5ld ",
+//            printf("| \033[38;5;10m%5ld\033[0m  :  %5ld ",
+        	printf("| %5ld  :  %5ld ",
               (long)Result->ZoneResult[j+k].Distance[l],
               (long)Result->ZoneResult[j+k].Status[l]);
           }
@@ -404,14 +405,14 @@ static uint8_t get_key(void)
 {
   uint8_t cmd = 0;
 
-  HAL_UART_Receive(&huart4, &cmd, 1, HAL_MAX_DELAY);
+//  HAL_UART_Receive(&huart4, &cmd, 1, HAL_MAX_DELAY);
 
   return cmd;
 }
 
 static uint32_t com_has_data(void)
 {
-  return __HAL_UART_GET_FLAG(&huart4, UART_FLAG_RXNE);;
+//  return __HAL_UART_GET_FLAG(&huart4, UART_FLAG_RXNE);;
 }
 
 #ifdef USE_BARE_DRIVER

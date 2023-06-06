@@ -61,6 +61,8 @@ void Error_Handler(void);
 #define LEDR_GPIO_Port GPIOK
 #define RADAR_nRST_Pin GPIO_PIN_9
 #define RADAR_nRST_GPIO_Port GPIOG
+#define SPI2_NSS_Pin GPIO_PIN_0
+#define SPI2_NSS_GPIO_Port GPIOI
 #define TOF_RST_Pin GPIO_PIN_3
 #define TOF_RST_GPIO_Port GPIOD
 #define TOF_LPn_Pin GPIO_PIN_2

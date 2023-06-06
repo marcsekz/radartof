@@ -7,5 +7,13 @@
 			"path": "CM7"
 		}
 	],
-	"settings": {}
+	"settings": {
+		"files.associations": {
+			"bgt60_stm32.h": "c",
+			"main.h": "c",
+			"bgt60.h": "c",
+			"icmp.h": "c",
+			"autoip.h": "c"
+		}
+	}
 }

@@ -1,0 +1,6 @@
+[submodule "firmware/CM4/Core/BGT60_Driver"]
+	path = firmware/CM4/Core/BGT60_Driver
+	url = https://git.ee.ethz.ch/pbl/research/infineon/bgt60-c-driver.git
+[submodule "firmware/CM4/Core/OV5640_Driver"]
+	path = firmware/CM4/Core/OV5640_Driver
+	url = https://github.com/STMicroelectronics/stm32-ov5640.git

@@ -55,10 +55,16 @@
 #define LWIP_TCP 0
 /*----- Value in opt.h for MEM_ALIGNMENT: 1 -----*/
 #define MEM_ALIGNMENT 4
+/*----- Default Value for MEM_SIZE: 1600 ---*/
+#define MEM_SIZE 131048
 /*----- Default Value for H7 devices: 0x30044000 -----*/
-#define LWIP_RAM_HEAP_POINTER 0x30044000
+#define LWIP_RAM_HEAP_POINTER 0x30020000
 /*----- Value supported for H7 devices: 1 -----*/
 #define LWIP_SUPPORT_CUSTOM_PBUF 1
+/*----- Default Value for PBUF_POOL_SIZE: 16 ---*/
+#define PBUF_POOL_SIZE 32
+/*----- Default Value for PBUF_POOL_BUFSIZE: 592 ---*/
+#define PBUF_POOL_BUFSIZE 1536
 /*----- Value in opt.h for LWIP_ETHERNET: LWIP_ARP || PPPOE_SUPPORT -*/
 #define LWIP_ETHERNET 1
 /*----- Value in opt.h for LWIP_DNS_SECURE: (LWIP_DNS_SECURE_RAND_XID | LWIP_DNS_SECURE_NO_MULTIPLE_OUTSTANDING | LWIP_DNS_SECURE_RAND_SRC_PORT) -*/
@@ -74,7 +80,7 @@
 /*----- Value in opt.h for LWIP_NETIF_LINK_CALLBACK: 0 -----*/
 #define LWIP_NETIF_LINK_CALLBACK 1
 /*----- Value in opt.h for TCPIP_THREAD_STACKSIZE: 0 -----*/
-#define TCPIP_THREAD_STACKSIZE 1024
+#define TCPIP_THREAD_STACKSIZE 1536
 /*----- Value in opt.h for TCPIP_THREAD_PRIO: 1 -----*/
 #define TCPIP_THREAD_PRIO 24
 /*----- Value in opt.h for TCPIP_MBOX_SIZE: 0 -----*/
@@ -111,8 +117,25 @@
 #define CHECKSUM_CHECK_TCP 0
 /*----- Value in opt.h for CHECKSUM_CHECK_ICMP6: 1 -----*/
 #define CHECKSUM_CHECK_ICMP6 0
+/*----- Default Value for ETHARP_DEBUG: LWIP_DBG_OFF ---*/
+#define ETHARP_DEBUG LWIP_DBG_ON
+/*----- Default Value for NETIF_DEBUG: LWIP_DBG_OFF ---*/
+#define NETIF_DEBUG LWIP_DBG_ON
+/*----- Default Value for ICMP_DEBUG: LWIP_DBG_OFF ---*/
+#define ICMP_DEBUG LWIP_DBG_ON
+/*----- Default Value for INET_DEBUG: LWIP_DBG_OFF ---*/
+#define INET_DEBUG LWIP_DBG_ON
+/*----- Default Value for IP_DEBUG: LWIP_DBG_OFF ---*/
+#define IP_DEBUG LWIP_DBG_ON
+/*----- Default Value for UDP_DEBUG: LWIP_DBG_OFF ---*/
+#define UDP_DEBUG LWIP_DBG_ON
 /*-----------------------------------------------------------------------------*/
 /* USER CODE BEGIN 1 */
+
+// #define LWIP_DEBUG 1
+
+
+#define LWIP_PLATFORM_DIAG(x) (printf x);
 
 /* USER CODE END 1 */
 

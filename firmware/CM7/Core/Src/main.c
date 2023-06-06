@@ -24,6 +24,10 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "pmic.h"
+#include <stdio.h>
+#include <stdlib.h>
+
+#include "udp.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -65,12 +69,13 @@ const osThreadAttr_t defaultTask_attributes = {
   .priority = (osPriority_t) osPriorityNormal,
 };
 /* USER CODE BEGIN PV */
-
+// uint8_t buf[1000];
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
 void PeriphCommonClock_Config(void);
+static void MPU_Config(void);
 static void MX_GPIO_Init(void);
 static void MX_FMC_Init(void);
 static void MX_QUADSPI_Init(void);
@@ -101,6 +106,9 @@ int main(void)
 /* USER CODE BEGIN Boot_Mode_Sequence_0 */
   int32_t timeout;
 /* USER CODE END Boot_Mode_Sequence_0 */
+
+  /* MPU Configuration--------------------------------------------------------*/
+  MPU_Config();
 
   /* Enable I-Cache---------------------------------------------------------*/
   SCB_EnableICache();
@@ -161,6 +169,11 @@ Error_Handler();
   MX_I2C1_Init();
   /* USER CODE BEGIN 2 */
   PMIC_Init(&hi2c1);
+  HAL_Delay(10);
+  printf("Hello\n");
+  HAL_GPIO_WritePin(ETH_nRST_GPIO_Port, ETH_nRST_Pin, GPIO_PIN_RESET);
+  HAL_Delay(10);
+  HAL_GPIO_WritePin(ETH_nRST_GPIO_Port, ETH_nRST_Pin, GPIO_PIN_SET);
   /* USER CODE END 2 */
 
   /* Init scheduler */
@@ -433,7 +446,8 @@ static void MX_UART4_Init(void)
   huart4.Init.OverSampling = UART_OVERSAMPLING_16;
   huart4.Init.OneBitSampling = UART_ONE_BIT_SAMPLE_DISABLE;
   huart4.Init.ClockPrescaler = UART_PRESCALER_DIV1;
-  huart4.AdvancedInit.AdvFeatureInit = UART_ADVFEATURE_NO_INIT;
+  huart4.AdvancedInit.AdvFeatureInit = UART_ADVFEATURE_SWAP_INIT;
+  huart4.AdvancedInit.Swap = UART_ADVFEATURE_SWAP_ENABLE;
   if (HAL_UART_Init(&huart4) != HAL_OK)
   {
     Error_Handler();
@@ -516,16 +530,19 @@ static void MX_GPIO_Init(void)
 
   /* GPIO Ports Clock Enable */
   __HAL_RCC_GPIOB_CLK_ENABLE();
+  __HAL_RCC_GPIOE_CLK_ENABLE();
   __HAL_RCC_GPIOG_CLK_ENABLE();
   __HAL_RCC_GPIOJ_CLK_ENABLE();
+  __HAL_RCC_GPIOD_CLK_ENABLE();
   __HAL_RCC_GPIOA_CLK_ENABLE();
   __HAL_RCC_GPIOK_CLK_ENABLE();
   __HAL_RCC_GPIOI_CLK_ENABLE();
+  __HAL_RCC_GPIOF_CLK_ENABLE();
   __HAL_RCC_GPIOH_CLK_ENABLE();
   __HAL_RCC_GPIOC_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(ETH_nRST_GPIO_Port, ETH_nRST_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(ETH_nRST_GPIO_Port, ETH_nRST_Pin, GPIO_PIN_SET);
 
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(LEDG_GPIO_Port, LEDG_Pin, GPIO_PIN_SET);
@@ -559,71 +576,6 @@ static void MX_GPIO_Init(void)
 }
 
 /* USER CODE BEGIN 4 */
-// /**
-//   * @brief Re-Initialize clocks to use HSE
-//   * @param None
-//   * @retval None
-//   */
-// static void Clock_ReInit(void)
-// {
-//   RCC_OscInitTypeDef RCC_OscInitStruct = {0};
-
-//   /** Supply configuration update enable
-//   */
-//   HAL_PWREx_ConfigSupply(PWR_LDO_SUPPLY);
-
-//   /** Configure the main internal regulator output voltage
-//   */
-//   __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE1);
-
-//   while(!__HAL_PWR_GET_FLAG(PWR_FLAG_VOSRDY)) {}
-
-//   __HAL_RCC_SYSCFG_CLK_ENABLE();
-//   __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE0);
-
-//   while(!__HAL_PWR_GET_FLAG(PWR_FLAG_VOSRDY)) {}
-
-//   /** Initializes the RCC Oscillators according to the specified parameters
-//   * in the RCC_OscInitTypeDef structure.
-//   */
-//   RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSE;
-//   RCC_OscInitStruct.HSEState = RCC_HSE_BYPASS;
-//   RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
-//   RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSE;
-//   RCC_OscInitStruct.PLL.PLLM = 5;
-//   RCC_OscInitStruct.PLL.PLLN = 192;
-//   RCC_OscInitStruct.PLL.PLLP = 2;
-//   RCC_OscInitStruct.PLL.PLLQ = 20;
-//   RCC_OscInitStruct.PLL.PLLR = 2;
-//   RCC_OscInitStruct.PLL.PLLRGE = RCC_PLL1VCIRANGE_2;
-//   RCC_OscInitStruct.PLL.PLLVCOSEL = RCC_PLL1VCOWIDE;
-//   RCC_OscInitStruct.PLL.PLLFRACN = 0;
-//   if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
-//   {
-//     Error_Handler();
-//   }
-
-//   RCC_PeriphCLKInitTypeDef PeriphClkInitStruct = {0};
-
-//   /** Initializes the peripherals clock
-//   */
-//   PeriphClkInitStruct.PeriphClockSelection = RCC_PERIPHCLK_SDMMC|RCC_PERIPHCLK_SPI2;
-//   PeriphClkInitStruct.PLL2.PLL2M = 25;
-//   PeriphClkInitStruct.PLL2.PLL2N = 200;
-//   PeriphClkInitStruct.PLL2.PLL2P = 2;
-//   PeriphClkInitStruct.PLL2.PLL2Q = 2;
-//   PeriphClkInitStruct.PLL2.PLL2R = 2;
-//   PeriphClkInitStruct.PLL2.PLL2RGE = RCC_PLL2VCIRANGE_0;
-//   PeriphClkInitStruct.PLL2.PLL2VCOSEL = RCC_PLL2VCOWIDE;
-//   PeriphClkInitStruct.PLL2.PLL2FRACN = 0;
-//   PeriphClkInitStruct.SdmmcClockSelection = RCC_SDMMCCLKSOURCE_PLL2;
-//   PeriphClkInitStruct.Spi123ClockSelection = RCC_SPI123CLKSOURCE_PLL2;
-//   if (HAL_RCCEx_PeriphCLKConfig(&PeriphClkInitStruct) != HAL_OK)
-//   {
-//     Error_Handler();
-//   }
-// }
-
 static void HSE_Enable(void)
 {
   GPIO_InitTypeDef GPIO_InitStruct = {0};
@@ -641,6 +593,14 @@ static void HSE_Enable(void)
     __ASM("NOP");
   }
 }
+
+int _write(int file, char *ptr, int len) {
+    HAL_UART_Transmit(&huart4, ptr, len, 100);
+    return len;
+}
+
+uint8_t blink = 0;
+
 /* USER CODE END 4 */
 
 /* USER CODE BEGIN Header_StartDefaultTask */
@@ -655,13 +615,85 @@ void StartDefaultTask(void *argument)
   /* init code for LWIP */
   MX_LWIP_Init();
   /* USER CODE BEGIN 5 */
+
+  err_t err;
+  struct udp_pcb* upcb = udp_new();
+
+  ip_addr_t myIP;
+  IP_ADDR4(&myIP, 10, 1, 0, 2);
+  udp_bind(upcb, &myIP, 2000);
+
+  ip_addr_t destIP;
+  IP_ADDR4(&destIP, 10, 1, 0, 3);
+  err = udp_connect(upcb, &destIP, 2001);
+
+  struct pbuf *txbuf;
+  txbuf = pbuf_alloc(PBUF_TRANSPORT, 9600, PBUF_RAM);
+  memset(txbuf->payload, 0x5a, 9600);
+
   /* Infinite loop */
   for(;;)
   {
-    HAL_GPIO_TogglePin(LEDG_GPIO_Port, LEDG_Pin);
-    osDelay(100);
+    // pbuf_take(txbuf, buf, 10000);
+    udp_send(upcb, txbuf);
+    
+    if (!blink++)
+      HAL_GPIO_TogglePin(LEDG_GPIO_Port, LEDG_Pin);
+    osDelay(1);
   }
   /* USER CODE END 5 */
+}
+
+/* MPU Configuration */
+
+void MPU_Config(void)
+{
+  MPU_Region_InitTypeDef MPU_InitStruct = {0};
+
+  /* Disables the MPU */
+  HAL_MPU_Disable();
+
+  /** Initializes and configures the Region and the memory to be protected
+  */
+  MPU_InitStruct.Enable = MPU_REGION_ENABLE;
+  MPU_InitStruct.Number = MPU_REGION_NUMBER0;
+  MPU_InitStruct.BaseAddress = 0x0;
+  MPU_InitStruct.Size = MPU_REGION_SIZE_4GB;
+  MPU_InitStruct.SubRegionDisable = 0x87;
+  MPU_InitStruct.TypeExtField = MPU_TEX_LEVEL0;
+  MPU_InitStruct.AccessPermission = MPU_REGION_NO_ACCESS;
+  MPU_InitStruct.DisableExec = MPU_INSTRUCTION_ACCESS_DISABLE;
+  MPU_InitStruct.IsShareable = MPU_ACCESS_SHAREABLE;
+  MPU_InitStruct.IsCacheable = MPU_ACCESS_NOT_CACHEABLE;
+  MPU_InitStruct.IsBufferable = MPU_ACCESS_NOT_BUFFERABLE;
+
+  HAL_MPU_ConfigRegion(&MPU_InitStruct);
+
+  /** Initializes and configures the Region and the memory to be protected
+  */
+  MPU_InitStruct.Number = MPU_REGION_NUMBER1;
+  MPU_InitStruct.BaseAddress = 0x30020000;
+  MPU_InitStruct.Size = MPU_REGION_SIZE_128KB;
+  MPU_InitStruct.SubRegionDisable = 0x0;
+  MPU_InitStruct.TypeExtField = MPU_TEX_LEVEL1;
+  MPU_InitStruct.AccessPermission = MPU_REGION_FULL_ACCESS;
+  MPU_InitStruct.IsShareable = MPU_ACCESS_NOT_SHAREABLE;
+
+  HAL_MPU_ConfigRegion(&MPU_InitStruct);
+
+  /** Initializes and configures the Region and the memory to be protected
+  */
+  MPU_InitStruct.Number = MPU_REGION_NUMBER2;
+  MPU_InitStruct.BaseAddress = 0x30040000;
+  MPU_InitStruct.Size = MPU_REGION_SIZE_512B;
+  MPU_InitStruct.TypeExtField = MPU_TEX_LEVEL0;
+  MPU_InitStruct.IsShareable = MPU_ACCESS_SHAREABLE;
+  MPU_InitStruct.IsBufferable = MPU_ACCESS_BUFFERABLE;
+
+  HAL_MPU_ConfigRegion(&MPU_InitStruct);
+  /* Enables the MPU */
+  HAL_MPU_Enable(MPU_PRIVILEGED_DEFAULT);
+
 }
 
 /**

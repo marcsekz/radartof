@@ -38,6 +38,13 @@
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
 
+#define NEW_DATA_HSEM_ID 1
+
+#define NEW_DATA_FLAG_ADDR 0x30010000ul
+#define MEAS_DATA_ADDR 0x30010001ul
+#define MEAS_DATA_SIZE 1284ul
+#define NEW_DATA_CHECK_PERIOD 10ul
+
 #ifndef HSEM_ID_0
 #define HSEM_ID_0 (0U) /* HW semaphore 0*/
 #endif
@@ -68,6 +75,13 @@ const osThreadAttr_t defaultTask_attributes = {
   .stack_size = 1024 * 4,
   .priority = (osPriority_t) osPriorityNormal,
 };
+/* Definitions for dataProcessTask */
+osThreadId_t dataProcessTaskHandle;
+const osThreadAttr_t dataProcessTask_attributes = {
+  .name = "dataProcessTask",
+  .stack_size = 1024 * 4,
+  .priority = (osPriority_t) osPriorityAboveNormal,
+};
 /* USER CODE BEGIN PV */
 // uint8_t buf[1000];
 /* USER CODE END PV */
@@ -83,6 +97,7 @@ static void MX_SDMMC2_SD_Init(void);
 static void MX_UART4_Init(void);
 static void MX_I2C1_Init(void);
 void StartDefaultTask(void *argument);
+void StartDataProcessTask(void *argument);
 
 /* USER CODE BEGIN PFP */
 static void HSE_Enable(void);
@@ -119,7 +134,7 @@ int main(void)
 /* USER CODE BEGIN Boot_Mode_Sequence_1 */
   /* Wait until CPU2 boots and enters in stop mode or timeout*/
   timeout = 0xFFFF;
-  while((__HAL_RCC_GET_FLAG(RCC_FLAG_D2CKRDY) != RESET) && (timeout-- > 0));
+  while((__HAL_RCC_GET_FLAG(RCC_FLAG_D2CKRDY) != RESET) && (timeout > 0));
   if ( timeout < 0 )
   {
   Error_Handler();
@@ -150,7 +165,7 @@ HAL_HSEM_FastTake(HSEM_ID_0);
 HAL_HSEM_Release(HSEM_ID_0,0);
 /* wait until CPU2 wakes up from stop mode */
 timeout = 0xFFFF;
-while((__HAL_RCC_GET_FLAG(RCC_FLAG_D2CKRDY) == RESET) && (timeout-- > 0));
+while((__HAL_RCC_GET_FLAG(RCC_FLAG_D2CKRDY) == RESET) && (timeout > 0));
 if ( timeout < 0 )
 {
 Error_Handler();
@@ -174,6 +189,7 @@ Error_Handler();
   HAL_GPIO_WritePin(ETH_nRST_GPIO_Port, ETH_nRST_Pin, GPIO_PIN_RESET);
   HAL_Delay(10);
   HAL_GPIO_WritePin(ETH_nRST_GPIO_Port, ETH_nRST_Pin, GPIO_PIN_SET);
+
   /* USER CODE END 2 */
 
   /* Init scheduler */
@@ -199,8 +215,12 @@ Error_Handler();
   /* creation of defaultTask */
   defaultTaskHandle = osThreadNew(StartDefaultTask, NULL, &defaultTask_attributes);
 
+  /* creation of dataProcessTask */
+  dataProcessTaskHandle = osThreadNew(StartDataProcessTask, NULL, &dataProcessTask_attributes);
+
   /* USER CODE BEGIN RTOS_THREADS */
   /* add threads, ... */
+  osThreadSuspend(dataProcessTaskHandle);
   /* USER CODE END RTOS_THREADS */
 
   /* USER CODE BEGIN RTOS_EVENTS */
@@ -599,6 +619,14 @@ int _write(int file, char *ptr, int len) {
     return len;
 }
 
+void HAL_HSEM_FreeCallback(uint32_t SemMask)
+{
+  if (SemMask == (1 << NEW_DATA_HSEM_ID))
+  {
+    osThreadFlagsSet(dataProcessTaskHandle, 0x00000001ul);
+  }
+}
+
 uint8_t blink = 0;
 
 /* USER CODE END 4 */
@@ -616,7 +644,31 @@ void StartDefaultTask(void *argument)
   MX_LWIP_Init();
   /* USER CODE BEGIN 5 */
 
-  err_t err;
+  osThreadResume(dataProcessTaskHandle);
+
+  /* Infinite loop */
+  for(;;)
+  {
+    // pbuf_take(txbuf, buf, 10000);
+    // udp_send(upcb, txbuf);
+    
+    // if (!blink++)
+    //   HAL_GPIO_TogglePin(LEDG_GPIO_Port, LEDG_Pin);
+    osDelay(1);
+  }
+  /* USER CODE END 5 */
+}
+
+/* USER CODE BEGIN Header_StartDataProcessTask */
+/**
+* @brief Function implementing the dataProcessTask thread.
+* @param argument: Not used
+* @retval None
+*/
+/* USER CODE END Header_StartDataProcessTask */
+void StartDataProcessTask(void *argument)
+{
+  /* USER CODE BEGIN StartDataProcessTask */
   struct udp_pcb* upcb = udp_new();
 
   ip_addr_t myIP;
@@ -625,23 +677,28 @@ void StartDefaultTask(void *argument)
 
   ip_addr_t destIP;
   IP_ADDR4(&destIP, 10, 1, 0, 3);
-  err = udp_connect(upcb, &destIP, 2001);
+  udp_connect(upcb, &destIP, 2001);
 
   struct pbuf *txbuf;
-  txbuf = pbuf_alloc(PBUF_TRANSPORT, 9600, PBUF_RAM);
-  memset(txbuf->payload, 0x5a, 9600);
+  txbuf = pbuf_alloc(PBUF_TRANSPORT, 2000, PBUF_RAM);
 
   /* Infinite loop */
+  u32_t start;
   for(;;)
   {
-    // pbuf_take(txbuf, buf, 10000);
-    udp_send(upcb, txbuf);
-    
-    if (!blink++)
+    start = osKernelGetTickCount();
+    // HAL_HSEM_ActivateNotification(1 << NEW_DATA_HSEM_ID);
+    // osThreadFlagsWait(0x00000001ul, osFlagsWaitAny, osWaitForever);
+    if (*(uint8_t*)NEW_DATA_FLAG_ADDR & 0x01)
+    {
+      (*(uint8_t*)NEW_DATA_FLAG_ADDR) &= ~0x01;
       HAL_GPIO_TogglePin(LEDG_GPIO_Port, LEDG_Pin);
-    osDelay(1);
+      pbuf_take(txbuf, (void*)MEAS_DATA_ADDR, 1284ul);
+      udp_send(upcb, txbuf);
+    }
+    osDelayUntil(start + NEW_DATA_CHECK_PERIOD);
   }
-  /* USER CODE END 5 */
+  /* USER CODE END StartDataProcessTask */
 }
 
 /* MPU Configuration */
@@ -689,6 +746,16 @@ void MPU_Config(void)
   MPU_InitStruct.TypeExtField = MPU_TEX_LEVEL0;
   MPU_InitStruct.IsShareable = MPU_ACCESS_SHAREABLE;
   MPU_InitStruct.IsBufferable = MPU_ACCESS_BUFFERABLE;
+
+  HAL_MPU_ConfigRegion(&MPU_InitStruct);
+
+  /** Initializes and configures the Region and the memory to be protected
+  */
+  MPU_InitStruct.Number = MPU_REGION_NUMBER3;
+  MPU_InitStruct.BaseAddress = 0x30000000;
+  MPU_InitStruct.Size = MPU_REGION_SIZE_128KB;
+  MPU_InitStruct.IsShareable = MPU_ACCESS_NOT_SHAREABLE;
+  MPU_InitStruct.IsBufferable = MPU_ACCESS_NOT_BUFFERABLE;
 
   HAL_MPU_ConfigRegion(&MPU_InitStruct);
   /* Enables the MPU */

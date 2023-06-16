@@ -5,6 +5,9 @@
 		},
 		{
 			"path": "CM7"
+		},
+		{
+			"path": "../software"
 		}
 	],
 	"settings": {
@@ -13,7 +16,14 @@
 			"main.h": "c",
 			"bgt60.h": "c",
 			"icmp.h": "c",
-			"autoip.h": "c"
+			"autoip.h": "c",
+			"ov5640.h": "c",
+			"app_camera.h": "c",
+			"stdint.h": "c",
+			"stm32h7xx_hal.h": "c",
+			"cmsis_os.h": "c",
+			"stm32h747i_discovery_camera.h": "c",
+			"lwip.h": "c"
 		}
 	}
 }

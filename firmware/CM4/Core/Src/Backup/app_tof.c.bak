@@ -35,8 +35,8 @@ extern "C" {
 /* Private define ------------------------------------------------------------*/
 /* uncomment following to use directly the bare driver instead of the BSP */
 /* #define USE_BARE_DRIVER */
-#define TIMING_BUDGET (30U) /* 5 ms < TimingBudget < 100 ms */
-#define RANGING_FREQUENCY (5U) /* Ranging frequency Hz (shall be consistent with TimingBudget value) */
+#define TIMING_BUDGET (10U) /* 5 ms < TimingBudget < 100 ms */
+#define RANGING_FREQUENCY (15U) /* Ranging frequency Hz (shall be consistent with TimingBudget value) */
 #define POLLING_PERIOD (1000U/RANGING_FREQUENCY) /* refresh rate for polling mode (milliseconds) */
 
 /* Private variables ---------------------------------------------------------*/
@@ -113,6 +113,21 @@ static void MX_VL53L5CX_SimpleRanging_Init(void)
     printf("CUSTOM_RANGING_SENSOR_Init failed\n");
     while(1);
   }
+  uint32_t Id;
+
+  CUSTOM_RANGING_SENSOR_ReadID(CUSTOM_VL53L5CX, &Id);
+  CUSTOM_RANGING_SENSOR_GetCapabilities(CUSTOM_VL53L5CX, &Cap);
+
+  Profile.RangingProfile = RS_PROFILE_8x8_CONTINUOUS;
+  Profile.TimingBudget = TIMING_BUDGET; /* 5 ms < TimingBudget < 100 ms */
+  Profile.Frequency = RANGING_FREQUENCY; /* Ranging frequency Hz (shall be consistent with TimingBudget value) */
+  Profile.EnableAmbient = 0; /* Enable: 1, Disable: 0 */
+  Profile.EnableSignal = 0; /* Enable: 1, Disable: 0 */
+
+  /* set the profile if different from default one */
+  CUSTOM_RANGING_SENSOR_ConfigProfile(CUSTOM_VL53L5CX, &Profile);
+
+  status = CUSTOM_RANGING_SENSOR_Start(CUSTOM_VL53L5CX, RS_MODE_BLOCKING_CONTINUOUS);
 }
 
 #ifdef USE_BARE_DRIVER

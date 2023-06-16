@@ -6,6 +6,7 @@
             "intelliSenseMode": "${default}",
             "includePath": [
                 "./USB_DEVICE/App",
+                "./Core/OV5640_Driver",
                 "./USB_DEVICE/Target",
                 "./Core/Inc",
                 "./../Drivers/BSP/Components/vl53l5cx/modules",
@@ -18,7 +19,10 @@
                 "./../Drivers/CMSIS/Device/ST/STM32H7xx/Include",
                 "./../Drivers/CMSIS/Include",
                 "./X-CUBE-TOF1/Target",
-                "./Core/BGT60_Driver/inc"
+                "./Core/BGT60_Driver/inc",
+                "./../Middlewares/Third_Party/FreeRTOS/Source/include",
+                "./../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2",
+                "./../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F"
             ],
             "defines": [
                 "DEBUG",

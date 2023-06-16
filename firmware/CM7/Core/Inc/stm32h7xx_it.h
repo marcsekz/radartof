@@ -55,6 +55,7 @@ void DebugMon_Handler(void);
 void ETH_IRQHandler(void);
 void OTG_HS_IRQHandler(void);
 void TIM17_IRQHandler(void);
+void HSEM1_IRQHandler(void);
 /* USER CODE BEGIN EFP */
 
 /* USER CODE END EFP */

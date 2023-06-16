@@ -30,6 +30,11 @@ ax.xaxis.tick_top()
 ax.set_xticklabels(labels, minor=False)
 ax.set_yticklabels(labels, minor=False)
 
+ax.set_xticks(np.arange(8), minor=False)
+ax.set_yticks(np.arange(8), minor=False)
+
+distance = np.zeros((8,8), dtype=np.uint32)
+
 while 1:
     data, addr = sock.recvfrom(65536) # buffer size is 65536 bytes
 
@@ -39,39 +44,20 @@ while 1:
         continue
 
     zoneresults = list()
-    distance = np.zeros((8,8))
-    # status = list()
 
     for i in range(64):
         zoneresults.append(struct.unpack(zoneResultFmt, data[4+20*i:24+20*i]))
 
-    # os.system('clear')
-    # print(f'Number of zones: {zonenum}')
-    # print("")
-
-    rowsize = int(math.sqrt(zonenum))
     for i in range(zonenum):
-        distance[i%8][int(i/8)] = zoneresults[i][1] # distance in mm
-        # status.append(zoneresults[i][2]) # 0 if valid, 1 if invalid
+        distance[i%8][int(i/8)] = 9999 if zoneresults[i][2] else zoneresults[i][1] # distance in mm
 
+    
+    print(distance)
+    print()
 
+    ax.clear()
 
-        # if zonenum == 0:
-        #     break
-
-        # if not i%rowsize and i > 0:
-        #     print("|")
-        # if zoneresults[i][2]:
-        #     print('| ;     ', end="")
-        # else:
-        #     print(f'|{zoneresults[i][0]:1};{zoneresults[i][1]:5}', end="")
-    # print("|")
-
-    heatmap = ax.pcolor(distance, cmap=plt.cm.autumn, vmin=0, vmax=500)
- 
-    # Put the major ticks at the middle of each cell
-    ax.set_xticks(np.arange(distance.shape[0]), minor=False)
-    ax.set_yticks(np.arange(distance.shape[0]), minor=False)
+    heatmap = ax.imshow(distance, vmin=0, vmax=500)
 
     fig.canvas.draw()
     fig.canvas.flush_events()

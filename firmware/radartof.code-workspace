@@ -23,7 +23,9 @@
 			"stm32h7xx_hal.h": "c",
 			"cmsis_os.h": "c",
 			"stm32h747i_discovery_camera.h": "c",
-			"lwip.h": "c"
+			"lwip.h": "c",
+			"custom_ranging_sensor.h": "c",
+			"stdio.h": "c"
 		}
 	}
 }

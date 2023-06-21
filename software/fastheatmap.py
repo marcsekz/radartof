@@ -4,10 +4,20 @@ import threading
 
 import socket
 import struct
+import os
+import datetime
+
+t = datetime.datetime.now()
+i = 1
+filename_base = f'./tof_record_{t.day}-{t.month}-{t.year}_{t.hour}-{t.minute}'
+filename = filename_base
+while os.path.exists(filename):
+    filename = filename_base + '-' + str(i)
+    i += 1
 
 rect_size = 50
 distance = np.zeros((8,8), dtype=int)
-dist_max = 2046
+dist_max = 2500
 
 def colormap(dist: int) -> str:
     if dist == 9999:
@@ -90,18 +100,30 @@ sock.bind((UDP_IP, UDP_PORT))
 
 app = App()
 
-while 1:
-    data, addr = sock.recvfrom(65536) # buffer size is 65536 bytes
+linecount = 0
 
-    zonenum = struct.unpack(zoneNumFmt, data[0:4])[0]
+with open(filename, "w") as fp:
+    while 1:
+        data, addr = sock.recvfrom(65536) # buffer size is 65536 bytes
 
-    if zonenum != 64:
-        continue
+        zonenum = struct.unpack(zoneNumFmt, data[0:4])[0]
 
-    zoneresults = list()
+        if zonenum != 64:
+            continue
 
-    for i in range(64):
-        zoneresults.append(struct.unpack(zoneResultFmt, data[4+20*i:24+20*i]))
+        zoneresults = list()
 
-    for i in range(zonenum):
-        distance[i%8][int(i/8)] = 9999 if zoneresults[i][2] else zoneresults[i][1] # distance in mm
+        for i in range(64):
+            zoneresults.append(struct.unpack(zoneResultFmt, data[4+20*i:24+20*i]))
+
+        for i in range(zonenum):
+            distance[i%8][int(i/8)] = 9999 if zoneresults[i][2] or 0==zoneresults[i][0] else zoneresults[i][1] # distance in mm
+
+        for i in range(zonenum):
+            d = -1 if zoneresults[i][2] or 0==zoneresults[i][0] else zoneresults[i][1] # distance in mm
+            # d = zoneresults[i][0]
+            fp.write(f'{d},')
+
+        fp.write('\n')
+        linecount += 1
+        # print(linecount)

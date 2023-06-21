@@ -8,7 +8,7 @@ i = 1
 filename_base = f'./tof_record_{t.day}-{t.month}-{t.year}_{t.hour}-{t.minute}'
 filename = filename_base
 while os.path.exists(filename):
-    filename = filename_base + str(i)
+    filename = filename_base + '-' + str(i)
     i += 1
 
 zoneNumFmt = '<I'
@@ -40,7 +40,7 @@ with open(filename, "w") as fp:
             zoneresults.append(struct.unpack(zoneResultFmt, data[4+20*i:24+20*i]))
 
         for i in range(zonenum):
-            d = -1 if zoneresults[i][2] else zoneresults[i][1] # distance in mm
+            d = -1 if zoneresults[i][2] or 0==zoneresults[i][0] else zoneresults[i][1] # distance in mm
             fp.write(f'{d},')
 
         fp.write('\n')

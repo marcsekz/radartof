@@ -17,7 +17,7 @@ while os.path.exists(filename):
 
 rect_size = 50
 distance = np.zeros((8,8), dtype=int)
-dist_max = 2500
+dist_max = 3000
 
 def colormap(dist: int) -> str:
     if dist == 9999:

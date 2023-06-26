@@ -37,6 +37,7 @@ distance = np.zeros((8,8), dtype=np.uint32)
 
 while 1:
     data, addr = sock.recvfrom(65536) # buffer size is 65536 bytes
+    continue
 
     zonenum = struct.unpack(zoneNumFmt, data[0:4])[0]
 

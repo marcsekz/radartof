@@ -3,11 +3,11 @@
     "configurations": [
         {
             "type": "cortex-debug",
-            "request": "attach",
+            "request": "launch",
             "servertype": "stlink",
             "cwd": "${workspaceRoot}",
             "executable": "Debug/radartof-fw-portenta_CM7.elf",
-            "name": "attach CM7 (ST-Link)",
+            "name": "Launch CM7 (ST-Link)",
             "device": "stm32h747xih6",
             "svdFile": "${userHome}/DEV/SVD/ST/STM32H7/STM32H747_CM7.svd",
             "interface": "swd",

@@ -7869,7 +7869,7 @@
       (net 99 "unconnected-(U1B-ADC_A3-PadJ2_79)") (pinfunction "ADC_A3") (pintype "bidirectional+no_connect") (tstamp b45e8f61-a4d5-4968-ac5c-926096390604))
     (pad "J2_80" smd rect (at -7.8 -25.76 180) (size 0.2 0.7) (layers "B.Cu" "B.Paste" "B.Mask")
       (net 83 "unconnected-(U1B-ADC_A7-PadJ2_80)") (pinfunction "ADC_A7") (pintype "bidirectional+no_connect") (tstamp 7ce70de0-28c4-47a1-a8d1-2177014f33a3))
-    (model "${KIPRJMOD}/Parts/Portenta/Arduino-Portenta-H7-STEP-A210428.step" hide
+    (model "${KIPRJMOD}/Parts/Portenta/Arduino-Portenta-H7-STEP-A210428.step"
       (offset (xyz 0 0 3.5))
       (scale (xyz 1 1 1))
       (rotate (xyz 0 0 90))
@@ -12096,7 +12096,7 @@
   )
   (gr_text "Zoltán Marcsek" (at 150 131.3) (layer "B.Mask") (tstamp 06b0dc26-afcb-4d79-8d5a-2c23754da3a3)
     (effects (font (face "Asap") (size 1 1) (thickness 0.2) bold) (justify mirror))
-    (render_cache "Zoltán Marcsek" -0
+    (render_cache "Zoltán Marcsek" 0
       (polygon
         (pts
           (xy 154.660885 131.715)          (xy 154.671006 131.713946)          (xy 154.680364 131.710786)          (xy 154.688958 131.70552)
